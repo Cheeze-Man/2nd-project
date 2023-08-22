@@ -9,7 +9,7 @@ export default function LoginContainer({ handleModal }) {
         <br />
         점핏의 다양한 혜택을 만나보세요.
       </p>
-      <button className="loginButton" onClick={handleModal}>
+      <button className="loginButton" onClick={() => handleModal('login')}>
         회원가입 / 로그인
       </button>
       <div className="snsLogin">

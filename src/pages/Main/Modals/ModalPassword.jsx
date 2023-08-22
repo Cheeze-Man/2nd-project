@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { GrClose } from 'react-icons/gr';
 import './Modals.scss';
 
-export default function ModalPassword({ email, handleModal, setModalNum }) {
+export default function ModalPassword({ email, handleModal }) {
   const userEmail = email;
 
   const handleClick = () => {
     handleModal();
-    setModalNum(0);
   };
 
   return (

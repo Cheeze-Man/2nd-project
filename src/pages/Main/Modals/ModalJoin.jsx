@@ -2,10 +2,11 @@ import React from 'react';
 import { GrClose } from 'react-icons/gr';
 import './Modals.scss';
 
-export default function ModalJoin({ handleModal, setModalNum }) {
+export default function ModalJoin({ handleModal, email }) {
+  const userEmail = email;
+
   const handleClick = () => {
     handleModal();
-    setModalNum(0);
   };
 
   return (

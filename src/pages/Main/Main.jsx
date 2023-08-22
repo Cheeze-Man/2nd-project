@@ -3,52 +3,32 @@ import Nav from '../../components/Nav/Nav';
 import Footer from '../../components/Footer/Footer';
 import LoginContainer from './LoginContainer';
 import LoginModal from './LoginModal';
-import './Main.scss';
 import ModalPassword from './Modals/ModalPassword';
 import ModalJoin from './Modals/ModalJoin';
+import './Main.scss';
 
 export default function Main() {
   const [email, setEmail] = useState('');
 
-  const [showModal, setShowModal] = useState(false);
-  const [modalNum, setModalNum] = useState(1);
+  const [modalStatus, setModalStatus] = useState('login');
 
-  const handleModal = () => {
-    setShowModal(!showModal);
+  const handleModal = status => {
+    setModalStatus(status);
   };
 
-  let modal;
-  if (showModal && modalNum === 0) {
-    modal = (
-      <LoginModal
-        email={email}
-        setEmail={setEmail}
-        handleModal={handleModal}
-        setModalNum={setModalNum}
-      />
-    );
-  } else if (showModal && modalNum === -1) {
-    modal = (
-      <ModalJoin
-        email={email}
-        setEmail={setEmail}
-        handleModal={handleModal}
-        setModalNum={setModalNum}
-      />
-    );
-  } else if (showModal && modalNum === 1) {
-    modal = (
-      <ModalPassword
-        email={email}
-        handleModal={handleModal}
-        setModalNum={setModalNum}
-      />
-    );
-  }
+  const MODAL_MAP = {
+    login: (
+      <LoginModal email={email} setEmail={setEmail} handleModal={handleModal} />
+    ),
+    join: (
+      <ModalJoin email={email} setEmail={setEmail} handleModal={handleModal} />
+    ),
+    password: <ModalPassword email={email} handleModal={handleModal} />,
+  };
 
   return (
     <div className="main">
-      {modal}
+      {MODAL_MAP[modalStatus]}
       <Nav />
       <LoginContainer handleModal={handleModal} />
       <Footer />

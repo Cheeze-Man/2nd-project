@@ -2,53 +2,23 @@ import React, { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 import './LoginModal.scss';
 
-export default function LoginModal({ handleModal, setModalNum }) {
-  // const [userInfo, setUserInfo] = useState({
-  //   email: '',
-  //   username: '',
-  //   password: '',
-  // });
+export default function LoginModal({ handleModal }) {
   const [tokenInfo, setTokenInfo] = useState({});
 
   const handleClick = () => {
-    handleModal();
-    setModalNum(0);
+    // fetch 시 response로 받아오는 message에 따라 handleModal의 인자를 정해주면 될 듯???
+    handleModal('join');
   };
 
-  // const handleInputChange = e => {
-  //   const { name, value } = e.target;
-  //   setUserInfo(prev => ({
-  //     ...prev,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleLogin = () => {
-  //   fetch('API주소', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //     body: JSON.stringify({
-  //       email: userInfo.email,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data) {
-  //         // localStorage.setItem('accessToken', data.accessToken);
-  //       }
-  //     });
-  // };
-
-  // const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  // const emailIsValid = emailPattern.test(userInfo.email);
+  const closeModal = () => {
+    handleModal();
+  };
 
   return (
     <div className="loginModal">
       <div className="loginModalContainer">
         <header className="loginModalHeader">
-          <GrClose onClick={handleClick} />
+          <GrClose onClick={closeModal} />
         </header>
         <main className="loginModalMain">
           <p className="modalGreeting">반가워요!</p>
@@ -63,7 +33,8 @@ export default function LoginModal({ handleModal, setModalNum }) {
             // onChange={handleInputChange}
           />
           <button
-          // disabled={!emailIsValid}
+            onClick={handleClick}
+            // disabled={!emailIsValid}
           >
             점핏 시작하기
           </button>
