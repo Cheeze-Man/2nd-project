@@ -1,0 +1,68 @@
+@import '../../styles/variables.scss';
+
+.nav {
+  width: 100%;
+  height: 120px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .navTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      width: 72px;
+      height: 32px;
+    }
+
+    .searchBar {
+      width: 520px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      border: 1px solid $green;
+      border-radius: 100px;
+
+      .searchIcon {
+        color: $green;
+        width: 24px;
+        height: 24px;
+        margin-left: 15px;
+        margin-right: 5px;
+      }
+    }
+    .seachBarInput {
+      width: 100%;
+      margin-right: 15px;
+      border: none;
+      outline: none;
+    }
+  }
+  .navBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .categories {
+      .categoryLink {
+        margin-right: 40px;
+      }
+    }
+    .userServise {
+      display: flex;
+      gap: 5px;
+      // .userInfo {
+      //   // .userInfoLink {
+      //   // }
+      // }
+      .iconDown {
+        &:hover {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

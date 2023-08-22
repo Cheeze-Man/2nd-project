@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/CategoryButton.scss';
+import './CategoryButton.scss';
 
 export default function CategoryButton({ className, text, onClick }) {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/Footer.scss';
+import './Footer.scss';
 
 export default function Footer() {
   return (
@@ -22,7 +22,7 @@ export default function Footer() {
         <dd>Copyright (c) (주)사람인. All rights reserved.</dd>
         <dd className="snsIcons">
           <a
-            target="_blank"
+            target="blank"
             title="인스타그램 새창열림"
             href="//www.instagram.com/jumpit.official"
           >
@@ -32,7 +32,7 @@ export default function Footer() {
             />
           </a>
           <a
-            target="_blank"
+            target="blank"
             title="카카오 새창열림"
             href="//pf.kakao.com/_BPpJs"
           >
@@ -42,7 +42,7 @@ export default function Footer() {
             />
           </a>
           <a
-            target="_blank"
+            target="blank"
             title="유튜브 새창열림"
             href="//www.youtube.com/channel/UCo8N6hfw4a5PDaiPaeBr4UQ/featured"
           >
@@ -52,7 +52,7 @@ export default function Footer() {
             />
           </a>
           <a
-            target="_blank"
+            target="blank"
             title="페이스북 새창열림"
             href="//www.facebook.com/jumpit.ITjump"
           >
@@ -62,7 +62,7 @@ export default function Footer() {
             />
           </a>
           <a
-            target="_blank"
+            target="blank"
             title="플레이스토어 새창열림"
             href="//play.google.com/store/apps/details?id=kr.co.saramin.jumpit"
           >
@@ -72,7 +72,7 @@ export default function Footer() {
             />
           </a>
           <a
-            target="_blank"
+            target="blank"
             title="앱스토어 새창열림"
             href="//apps.apple.com/app/id1552125375"
           >
@@ -87,13 +87,13 @@ export default function Footer() {
       <div className="footerLinks">
         <ul className="links">
           <li>
-            <a target="_blank" title="새창열림" href="/hello">
+            <a target="blank" title="새창열림" href="/hello">
               서비스 소개
             </a>
           </li>
           <li>
             <a
-              target="_blank"
+              target="blank"
               title="기업서비스 새창열림"
               href="//biz.jumpit.co.kr"
             >
@@ -102,7 +102,7 @@ export default function Footer() {
           </li>
           <li>
             <a
-              target="_blank"
+              target="blank"
               title="점핏 블로그 새창열림"
               href="//team.jumpit.co.kr"
             >
@@ -113,18 +113,18 @@ export default function Footer() {
         {/* right */}
         <ul className="links">
           <li>
-            <a target="_blank" title="새창열림" href="/policy/terms">
+            <a target="blank" title="새창열림" href="/policy/terms">
               이용약관
             </a>
           </li>
           <li>
-            <a target="_blank" title="새창열림" href="/policy/private">
+            <a target="blank" title="새창열림" href="/policy/private">
               <b>개인정보처리방침</b>
             </a>
           </li>
           <li>
             <a
-              target="_blank"
+              target="blank"
               title="자주묻는질문 FAQ 새창열림"
               href="//team.jumpit.co.kr/e8154e47-4105-42fa-b374-39181297ed35"
             >

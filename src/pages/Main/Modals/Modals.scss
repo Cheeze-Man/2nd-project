@@ -1,0 +1,159 @@
+@import '../../../styles/variables.scss';
+
+.modalPassword {
+  position: fixed;
+  inset: 0px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  .modalPasswordContainer {
+    min-width: 360px;
+    max-width: 768px;
+    background-color: rgb(255, 255, 255);
+    margin: 0px auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modalPasswordHeader {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: right;
+    svg {
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .modalPasswordMain {
+    padding: 0px 20px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    .modalGreeting {
+      line-height: 30px;
+      font-size: 24px;
+    }
+    .inputNameIsPassword {
+      color: #222222;
+      margin-top: 30px;
+      padding-bottom: 12px;
+    }
+    .modalInput {
+      width: 100%;
+      height: 48px;
+      padding: 12px 16px;
+      border: 1px solid rgb(212, 212, 212);
+      color: rgb(0, 0, 0);
+      background: rgb(255, 255, 255);
+      border-radius: 4px;
+      letter-spacing: -1px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      color: rgb(255, 255, 255);
+      border: 1px solid black;
+      border-radius: 3px;
+      background: black;
+      height: 56px;
+      line-height: 54px;
+      margin: 24px 0 16px;
+      font-size: 16px;
+      cursor: pointer;
+      &:disabled {
+        border: 1px solid rgb(196, 196, 196);
+        background: rgb(196, 196, 196);
+        cursor: default;
+      }
+    }
+    .findYourPassword {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.5px;
+      color: rgb(136, 136, 136);
+      text-decoration: underline;
+    }
+  }
+}
+
+.modalJoin {
+  position: fixed;
+  inset: 0px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  .modalJoinContainer {
+    min-width: 360px;
+    max-width: 768px;
+    background-color: rgb(255, 255, 255);
+    margin: 0px auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modalJoinHeader {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: right;
+    svg {
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .modalJoinMain {
+    padding: 0px 20px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    .modalGreeting {
+      line-height: 30px;
+      font-size: 24px;
+    }
+    .inputNameIsEmail,
+    .inputNameIsUsername,
+    .inputNameIsPassword {
+      color: #222222;
+      margin-top: 30px;
+      padding-bottom: 12px;
+    }
+    .modalInput {
+      width: 100%;
+      height: 48px;
+      padding: 12px 16px;
+      border: 1px solid rgb(212, 212, 212);
+      color: rgb(0, 0, 0);
+      background: rgb(255, 255, 255);
+      border-radius: 4px;
+      letter-spacing: -1px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      color: rgb(255, 255, 255);
+      border: 1px solid black;
+      border-radius: 3px;
+      background: black;
+      height: 56px;
+      line-height: 54px;
+      margin: 24px 0 16px;
+      font-size: 16px;
+      cursor: pointer;
+      &:disabled {
+        border: 1px solid rgb(196, 196, 196);
+        background: rgb(196, 196, 196);
+        cursor: default;
+      }
+    }
+    .findYourPassword {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.5px;
+      color: rgb(136, 136, 136);
+      text-decoration: underline;
+    }
+  }
+}
