@@ -7,13 +7,38 @@ export default function ModalJoin({ handleModal, email }) {
     email: email,
     username: '',
     password: '',
+    privateDataPeriod: '',
     phoneNumber: '',
     birthday: '',
     experienceYear: '',
     agreement: 0,
-    privateDataPeriod: '',
     withdraw: '',
   });
+
+  const [agreements, setAgreements] = useState({
+    agreement1: false,
+    agreement2: false,
+    agreement3: false,
+  });
+
+  const handleOnSubmit = () => {
+    fetch('API주소', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(joinUserInfo),
+    })
+      .then(res => res.json())
+      .then(data => {
+        const message = data.message;
+        if (message === 'user is created') {
+          handleModal('login');
+        } else if (message === 'dataSource Error #createUser') {
+          alert('가입 실패 ㅠㅠ');
+        }
+      });
+  };
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -37,14 +62,37 @@ export default function ModalJoin({ handleModal, email }) {
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
   const passwordIsValid = passwordPattern.test(joinUserInfo.password);
-  const [allRequiredChecked, setAllRequiredChecked] = useState(false);
-  const handleCheckboxChange = event => {
-    const checkboxes = document.querySelectorAll('.requiredCheckbox');
-    const areAllChecked = Array.from(checkboxes).every(
-      checkbox => checkbox.checked,
-    );
-    setAllRequiredChecked(areAllChecked);
+
+  const handleCheckboxChange = e => {
+    const { id } = e.target;
+    let bln = !agreements[id];
+    setAgreements(prev => ({
+      ...prev,
+      [id]: bln,
+    }));
   };
+
+  const handleAllCheckboxChange = () => {
+    let bln =
+      agreements.agreement1 &&
+      agreements.agreement2 &&
+      agreements.agreement3 &&
+      joinUserInfo.agreement;
+    setAgreements(prev => ({
+      ...prev,
+      agreement1: !bln,
+      agreement2: !bln,
+      agreement3: !bln,
+    }));
+    let smsBln = joinUserInfo.agreement === 0 ? 1 : 0;
+    setJoinUserInfo(prev => ({
+      ...prev,
+      agreement: smsBln,
+    }));
+  };
+
+  const allRequiredChecked =
+    agreements.agreement1 && agreements.agreement2 && agreements.agreement3;
   const radioIsValid = joinUserInfo.privateDataPeriod !== '';
 
   const userInfoIsValid =
@@ -59,10 +107,10 @@ export default function ModalJoin({ handleModal, email }) {
   };
 
   const handleSmsAgreement = () => {
-    let bln = joinUserInfo.agreement === 0 ? 1 : 0;
+    let smsBln = joinUserInfo.agreement === 0 ? 1 : 0;
     setJoinUserInfo(prev => ({
       ...prev,
-      agreement: bln,
+      agreement: smsBln,
     }));
   };
 
@@ -113,7 +161,12 @@ export default function ModalJoin({ handleModal, email }) {
           </label>
           <div className="checkboxContainer">
             <div className="checkboxDiv">
-              <input className="checkbox" type="checkbox" id="agreementAll" />
+              <input
+                className="checkbox"
+                type="checkbox"
+                id="agreementAll"
+                onChange={handleAllCheckboxChange}
+              />
               <label htmlFor="agreementAll">
                 <span className="agreeAll">전체 동의</span> (선택 항목에 대한
                 동의 포함)
@@ -122,9 +175,10 @@ export default function ModalJoin({ handleModal, email }) {
             <div className="checkboxLine" />
             <div className="checkboxDiv">
               <input
-                className="checkbox requiredCheckbox"
+                className="checkbox"
                 type="checkbox"
                 id="agreement1"
+                checked={agreements.agreement1}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="agreement1">
@@ -133,9 +187,10 @@ export default function ModalJoin({ handleModal, email }) {
             </div>
             <div className="checkboxDiv">
               <input
-                className="checkbox requiredCheckbox"
+                className="checkbox"
                 type="checkbox"
                 id="agreement2"
+                checked={agreements.agreement2}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="agreement2">
@@ -144,9 +199,10 @@ export default function ModalJoin({ handleModal, email }) {
             </div>
             <div className="checkboxDiv">
               <input
-                className="checkbox requiredCheckbox"
+                className="checkbox"
                 type="checkbox"
                 id="agreement3"
+                checked={agreements.agreement3}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="agreement3">
@@ -159,6 +215,7 @@ export default function ModalJoin({ handleModal, email }) {
                 className="checkbox"
                 type="checkbox"
                 id="agreement"
+                checked={joinUserInfo.agreement}
                 onChange={handleSmsAgreement}
               />
               <label htmlFor="agreement">마케팅 수신 동의</label>
@@ -172,7 +229,7 @@ export default function ModalJoin({ handleModal, email }) {
                 type="radio"
                 name="privateDataPeriod"
                 onClick={() => {
-                  handlePrivateDataPeriodChange(0);
+                  handlePrivateDataPeriodChange('0');
                 }}
               />
               <label>탈퇴 시</label>
@@ -180,7 +237,7 @@ export default function ModalJoin({ handleModal, email }) {
                 type="radio"
                 name="privateDataPeriod"
                 onClick={() => {
-                  handlePrivateDataPeriodChange(1);
+                  handlePrivateDataPeriodChange('1');
                 }}
               />
               <label>5년</label>
@@ -188,7 +245,7 @@ export default function ModalJoin({ handleModal, email }) {
                 type="radio"
                 name="privateDataPeriod"
                 onClick={() => {
-                  handlePrivateDataPeriodChange(2);
+                  handlePrivateDataPeriodChange('2');
                 }}
               />
               <label>3년</label>
@@ -196,13 +253,15 @@ export default function ModalJoin({ handleModal, email }) {
                 type="radio"
                 name="privateDataPeriod"
                 onClick={() => {
-                  handlePrivateDataPeriodChange(3);
+                  handlePrivateDataPeriodChange('3');
                 }}
               />
               <label>1년</label>
             </div>
           </div>
-          <button disabled={!userInfoIsValid}>회원가입</button>
+          <button disabled={!userInfoIsValid} onClick={handleOnSubmit}>
+            회원가입
+          </button>
         </main>
       </div>
     </div>

@@ -31,11 +31,14 @@ export default function ModalPassword({ email, handleModal }) {
     })
       .then(res => res.json())
       .then(data => {
-        if (data) {
+        if (data.accessToken) {
           localStorage.setItem('token', data.accessToken);
           closeModal();
         } else {
-          alert('토큰 정보 없음.');
+          const message = data.message;
+          if (message === 'INVALID_USER') {
+            alert('비밀 번호를 확인해주세요.');
+          }
         }
       });
   };

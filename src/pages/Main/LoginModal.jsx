@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GrClose } from 'react-icons/gr';
 import './LoginModal.scss';
 
@@ -18,10 +18,10 @@ export default function LoginModal({
     })
       .then(res => res.json())
       .then(data => {
-        if (data.message === `INVALID_USER: ${email}`) {
+        const message = data.message;
+        if (message === 'INVALID_USER') {
           handleModal('join');
-        } else if (data.user === email) {
-          console.log(data);
+        } else if (message === 'user is confirmed') {
           handleModal('password');
         }
       });
