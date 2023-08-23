@@ -9,8 +9,10 @@ import './Main.scss';
 
 export default function Main() {
   const [email, setEmail] = useState('');
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const emailIsValid = emailPattern.test(email);
 
-  const [modalStatus, setModalStatus] = useState('login');
+  const [modalStatus, setModalStatus] = useState('join');
 
   const handleModal = status => {
     setModalStatus(status);
@@ -18,7 +20,12 @@ export default function Main() {
 
   const MODAL_MAP = {
     login: (
-      <LoginModal email={email} setEmail={setEmail} handleModal={handleModal} />
+      <LoginModal
+        email={email}
+        setEmail={setEmail}
+        handleModal={handleModal}
+        emailIsValid={emailIsValid}
+      />
     ),
     join: (
       <ModalJoin email={email} setEmail={setEmail} handleModal={handleModal} />

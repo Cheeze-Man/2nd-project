@@ -2,16 +2,37 @@ import React, { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 import './LoginModal.scss';
 
-export default function LoginModal({ handleModal }) {
-  const [tokenInfo, setTokenInfo] = useState({});
-
+export default function LoginModal({
+  handleModal,
+  email,
+  setEmail,
+  emailIsValid,
+}) {
   const handleClick = () => {
-    // fetch 시 response로 받아오는 message에 따라 handleModal의 인자를 정해주면 될 듯???
-    handleModal('join');
+    fetch('/data/data.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({ email: email }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === `INVALID_USER: ${email}`) {
+          handleModal('join');
+        } else if (data.user === email) {
+          console.log(data);
+          handleModal('password');
+        }
+      });
   };
 
   const closeModal = () => {
     handleModal();
+  };
+
+  const handleEmailChange = e => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -29,13 +50,10 @@ export default function LoginModal({ handleModal }) {
             placeholder="이메일"
             type="email"
             name="email"
-            // value={userInfo.email}
-            // onChange={handleInputChange}
+            value={email}
+            onChange={handleEmailChange}
           />
-          <button
-            onClick={handleClick}
-            // disabled={!emailIsValid}
-          >
+          <button onClick={handleClick} disabled={!emailIsValid}>
             점핏 시작하기
           </button>
           <div className="checkboxDiv">

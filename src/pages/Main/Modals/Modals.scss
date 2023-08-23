@@ -94,7 +94,7 @@
   }
 
   .modalJoinHeader {
-    padding: 20px 20px;
+    padding: 20px 20px 0;
     display: flex;
     justify-content: right;
     svg {
@@ -109,16 +109,22 @@
     font-size: 15px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     .modalGreeting {
       line-height: 30px;
       font-size: 24px;
     }
+    .emailAnnounce {
+      color: #999999;
+      font-size: 12px;
+      margin-top: 6px;
+    }
     .inputNameIsEmail,
     .inputNameIsUsername,
-    .inputNameIsPassword {
+    .inputNameIsuserPassword {
       color: #222222;
-      margin-top: 30px;
-      padding-bottom: 12px;
+      margin-top: 15px;
+      padding-bottom: 10px;
     }
     .modalInput {
       width: 100%;
@@ -148,12 +154,56 @@
         cursor: default;
       }
     }
-    .findYourPassword {
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: -0.5px;
-      color: rgb(136, 136, 136);
-      text-decoration: underline;
+    .checkboxContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .checkboxLine {
+        height: 1px;
+        border-bottom: 1px solid rgb(236, 236, 236);
+      }
+      .checkboxDiv {
+        display: flex;
+        .checkbox {
+          display: none;
+        }
+        label {
+          color: #888888;
+        }
+        .checkbox + label {
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+        }
+        .checkbox + label:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 24px;
+          height: 24px;
+          border: 1px solid rgb(212, 212, 212);
+          border-radius: 4px;
+          background-color: transparent;
+        }
+        .checkbox:checked + label:before {
+          background-color: $green;
+          border-color: $green;
+          content: '\2713';
+          color: white;
+          text-align: center;
+          line-height: 18px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .privateDataPeriod {
+      h1 {
+        font-size: 15px;
+        padding: 20px 0 12px;
+      }
     }
   }
 }
