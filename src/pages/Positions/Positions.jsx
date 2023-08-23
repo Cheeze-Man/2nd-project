@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Positions.scss';
 import Nav from '../../components/Nav.jsx';
 import Card from '../../components/Card.jsx';
 import PositionBtn from '../Positions/PositionBtn.jsx';
 
 export default function Positions() {
+  const [openTech, setOpenTech] = useState(false);
+  function handleTechClick() {
+    setOpenTech(!openTech);
+  }
+
   const positionJobBtn = {
     jobGroup: [
       '전체',
@@ -18,10 +23,25 @@ export default function Positions() {
       '게임 서버 개발자',
     ],
   };
+  const [cardData, setCardData] = useState({
+    urlLink: '',
+    imgSrc: '',
+    name: '',
+    title: '',
+    language: '',
+    location: '',
+    career: '',
+  });
 
-  const cardList = {
-    card: ['1', '2', '3', '4', '5', '6', '7'],
-  };
+  const { urlLink, imgSrc, name, title, language, location, career } = cardData;
+
+  fetch('', { method: 'GET' })
+    .then(response => response.json())
+    .then(data => {
+      setCardData(data);
+    });
+
+  fetch({});
 
   return (
     <div className="positions">
@@ -31,17 +51,28 @@ export default function Positions() {
         <div className="positionList">
           {/* 추후 advanced router세션 이후 기능 구현할 것 */}
           {positionJobBtn.jobGroup.map((group, index) => (
-            <PositionBtn key={index} jobGroup={group} />
+            <PositionBtn
+              handleTechClick={handleTechClick}
+              key={index}
+              jobGroup={group}
+            />
           ))}
         </div>
+        {openTech && <div>asdkfj;asdlfjkls</div>}
       </div>
-      <div className="caedListDiv">
+      <div className="cardListDiv">
         <div></div>
         <div className="cardListStyle">
           <div className="cardList">
-            {cardList.card.map((list, index) => (
-              <Card key={index} list={list} />
-            ))}
+            <Card
+              urlLink={urlLink}
+              imgSrc={imgSrc}
+              name={name}
+              title={title}
+              language={language}
+              location={location}
+              career={career}
+            />
           </div>
         </div>
       </div>
