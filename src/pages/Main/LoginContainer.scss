@@ -9,6 +9,46 @@
   padding: 32px 20px 20px;
   border-radius: 4px;
 
+  .loginContainerUserName {
+    display: flex;
+    align-items: center;
+
+    .logoutButton {
+      padding: 5px;
+      color: #999999;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+
+  .loginContainerUserEmail {
+    color: #666666;
+    margin-top: -40px;
+  }
+
+  .loginMenus {
+    display: flex;
+
+    .loginMenu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 50%;
+      height: 50px;
+      margin-bottom: 20px;
+      cursor: pointer;
+
+      &:first-child {
+        border-right: 1px solid rgb(228, 228, 228);
+      }
+      &:last-child {
+        border-left: 1px solid rgb(228, 228, 228);
+      }
+    }
+  }
+
   .loginAnnouncement {
     font-size: 17px;
     color: #222222;

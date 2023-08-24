@@ -1,0 +1,22 @@
+.bannerContainer {
+  width: 700px;
+  height: 340px;
+  border: 1px solid rgb(228, 228, 228);
+  background-color: black;
+  border-radius: 4px;
+  background-image: url('https://cdn.jumpit.co.kr/home_contents/main_banner/20230822/v_home_img_mainbanner_6.png');
+
+  .bannerDiv {
+    position: relative;
+
+    h1 {
+      color: rgb(255, 255, 255);
+      position: absolute;
+      font-size: 32px;
+      line-height: 45px;
+      top: 140px;
+      left: 50px;
+      max-width: 600px;
+    }
+  }
+}

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-bottom: 40px;
 
   .navTop {
     display: flex;
@@ -32,6 +33,7 @@
         height: 24px;
         margin-left: 15px;
         margin-right: 5px;
+        cursor: pointer;
       }
     }
     .seachBarInput {
@@ -39,6 +41,7 @@
       margin-right: 15px;
       border: none;
       outline: none;
+      font-size: 15px;
     }
   }
 
@@ -50,6 +53,7 @@
     .categories {
       .categoryLink {
         margin-right: 40px;
+        color: black;
       }
     }
 

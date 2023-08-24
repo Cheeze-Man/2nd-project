@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.collectionByTheme {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 185px;
+  margin: 70px 0;
+
+  .themeTitle {
+    font-size: 24px;
+  }
+
+  .themeBanners {
+    display: flex;
+    justify-content: space-between;
+    .themeBanner {
+      width: 520px;
+      height: 140px;
+      padding: 35px 30px;
+      cursor: pointer;
+
+      .themeBannerTitle {
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+
+    .firstThemeBanner {
+      background: url(https://cdn.jumpit.co.kr/jumpit/position/themes/unicorns/pc_bn_themes_unicorns.webp)
+        center center / 520px 140px no-repeat;
+    }
+    .secondThemeBanner {
+      background: url(https://cdn.jumpit.co.kr/jumpit/position/themes/forthefuture/pc_bn_themes_forthefuture.webp)
+        center center / 520px 140px no-repeat;
+    }
+  }
+}

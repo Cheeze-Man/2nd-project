@@ -2,10 +2,12 @@ import React from 'react';
 import { FiSearch, FiChevronDown } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
+
 const NAV_CATEGORIES = [
   ['직무 탐색', '/jobsearch'],
   ['이력서', '/resume'],
 ];
+
 export default function Nav() {
   return (
     <nav className="nav">

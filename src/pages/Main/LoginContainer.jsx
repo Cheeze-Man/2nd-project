@@ -2,7 +2,34 @@ import React from 'react';
 import './LoginContainer.scss';
 
 export default function LoginContainer({ handleModal }) {
-  return (
+  const token = localStorage.getItem('token');
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
+
+  return token ? (
+    <div className="loginContainer">
+      <div className="loginContainerUserName">
+        <p className="loginAnnouncement">회원님 반가워요</p>
+        <p className="logoutButton" onClick={handleLogout}>
+          로그아웃
+        </p>
+      </div>
+      <p className="loginContainerUserEmail">email@email.com</p>
+      <div className="loginMenus">
+        <div className="loginMenu">
+          <p>📝</p>
+          <p>이력서 작성</p>
+        </div>
+        <div className="loginMenu">
+          <p>😎</p>
+          <p>마이점핏</p>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="loginContainer">
       <p className="loginAnnouncement">
         회원가입/로그인하고
