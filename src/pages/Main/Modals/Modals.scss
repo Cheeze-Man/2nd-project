@@ -5,6 +5,7 @@
   inset: 0px;
   background: rgba(0, 0, 0, 0.6);
   z-index: 999;
+
   .modalPasswordContainer {
     min-width: 360px;
     max-width: 768px;
@@ -31,15 +32,18 @@
     font-size: 15px;
     display: flex;
     flex-direction: column;
+
     .modalGreeting {
       line-height: 30px;
       font-size: 24px;
     }
+
     .inputNameIsPassword {
       color: #222222;
       margin-top: 30px;
       padding-bottom: 12px;
     }
+
     .modalInput {
       width: 100%;
       height: 48px;
@@ -52,6 +56,7 @@
       box-sizing: border-box;
       font-size: 16px;
     }
+
     button {
       color: rgb(255, 255, 255);
       border: 1px solid black;
@@ -68,6 +73,7 @@
         cursor: default;
       }
     }
+
     .findYourPassword {
       font-size: 16px;
       line-height: 24px;
@@ -83,6 +89,7 @@
   inset: 0px;
   background: rgba(0, 0, 0, 0.6);
   z-index: 999;
+
   .modalJoinContainer {
     min-width: 360px;
     max-width: 768px;
@@ -110,15 +117,18 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
     .modalGreeting {
       line-height: 30px;
       font-size: 24px;
     }
+
     .emailAnnounce {
       color: #999999;
       font-size: 12px;
       margin-top: 6px;
     }
+
     .inputNameIsEmail,
     .inputNameIsUsername,
     .inputNameIsuserPassword {
@@ -126,6 +136,7 @@
       margin-top: 15px;
       padding-bottom: 10px;
     }
+
     .modalInput {
       width: 100%;
       height: 48px;
@@ -138,6 +149,7 @@
       box-sizing: border-box;
       font-size: 16px;
     }
+
     button {
       color: rgb(255, 255, 255);
       border: 1px solid black;
@@ -154,27 +166,34 @@
         cursor: default;
       }
     }
+
     .checkboxContainer {
       display: flex;
       flex-direction: column;
       gap: 20px;
+
       .checkboxLine {
         height: 1px;
         border-bottom: 1px solid rgb(236, 236, 236);
       }
+
       .checkboxDiv {
         display: flex;
+
         .checkbox {
           display: none;
         }
+
         label {
           color: #888888;
         }
+
         .checkbox + label {
           position: relative;
           padding-left: 30px;
           cursor: pointer;
         }
+
         .checkbox + label:before {
           content: '';
           position: absolute;
@@ -186,6 +205,7 @@
           border-radius: 4px;
           background-color: transparent;
         }
+
         .checkbox:checked + label:before {
           background-color: $green;
           border-color: $green;

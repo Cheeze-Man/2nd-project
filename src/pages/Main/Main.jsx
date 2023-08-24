@@ -5,14 +5,14 @@ import LoginContainer from './LoginContainer';
 import LoginModal from './LoginModal';
 import ModalPassword from './Modals/ModalPassword';
 import ModalJoin from './Modals/ModalJoin';
+import { emailPattern } from '../../util/constants';
 import './Main.scss';
 
 export default function Main() {
   const [email, setEmail] = useState('');
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const emailIsValid = emailPattern.test(email);
 
-  const [modalStatus, setModalStatus] = useState('join');
+  const [modalStatus, setModalStatus] = useState('');
 
   const handleModal = status => {
     setModalStatus(status);

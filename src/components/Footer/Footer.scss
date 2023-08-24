@@ -1,10 +1,12 @@
 .footer {
   display: flex;
   justify-content: space-between;
+
   .footerLogo {
     width: 8%;
     height: 33px;
   }
+
   .footerInformations {
     font-size: 13px;
     display: flex;
@@ -12,21 +14,25 @@
     gap: 13px;
     color: #888888;
   }
+
   .snsIcons {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
     gap: 7px;
   }
+
   .footerLinks {
     font-size: 14px;
     display: flex;
     flex-direction: row;
     gap: 30px;
+
     .links {
       display: flex;
       flex-direction: column;
       gap: 10px;
+
       a {
         color: #444444;
       }

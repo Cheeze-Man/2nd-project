@@ -1,6 +1,70 @@
 import React from 'react';
 import './Footer.scss';
 
+const FOOTER_ICONS = [
+  {
+    title: '인스타그램',
+    href: '//www.instagram.com/jumpit.official',
+    src: '//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-instagram.svg',
+  },
+  {
+    title: '카카오',
+    href: '//pf.kakao.com/_BPpJs',
+    src: '//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-kakao.svg',
+  },
+  {
+    title: '유튜브',
+    href: '//www.youtube.com/channel/UCo8N6hfw4a5PDaiPaeBr4UQ/featured',
+    src: '//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-youtube.svg',
+  },
+  {
+    title: '페이스북',
+    href: '//www.facebook.com/jumpit.ITjump',
+    src: '//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-facebook.svg',
+  },
+  {
+    title: '플레이스토어',
+    href: '//play.google.com/store/apps/details?id=kr.co.saramin.jumpit',
+    src: '//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-google.svg',
+  },
+  {
+    title: '앱스토어',
+    href: '//apps.apple.com/app/id1552125375',
+    src: '//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-apple.svg',
+  },
+];
+
+const FOOTER_LINKS = [
+  [
+    {
+      title: '서비스 소개',
+      href: '/hello',
+    },
+    {
+      title: '기업 서비스',
+      href: '//biz.jumpit.co.kr',
+    },
+    {
+      title: '점핏Team',
+      href: '//team.jumpit.co.kr',
+    },
+  ],
+  [
+    {
+      title: '이용약관',
+      href: '/policy/terms',
+    },
+    {
+      title: '개인정보처리방침',
+      href: '/policy/private',
+    },
+    {
+      title: '자주 묻는 FAQ',
+      href: '//team.jumpit.co.kr/e8154e47-4105-42fa-b374-39181297ed35',
+    },
+  ],
+];
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -21,116 +85,48 @@ export default function Footer() {
         </dd>
         <dd>Copyright (c) (주)사람인. All rights reserved.</dd>
         <dd className="snsIcons">
-          <a
-            target="blank"
-            title="인스타그램 새창열림"
-            href="//www.instagram.com/jumpit.official"
-          >
-            <img
-              alt="인스타그램"
-              src="//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-instagram.svg"
-            />
-          </a>
-          <a
-            target="blank"
-            title="카카오 새창열림"
-            href="//pf.kakao.com/_BPpJs"
-          >
-            <img
-              alt="카카오"
-              src="//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-kakao.svg"
-            />
-          </a>
-          <a
-            target="blank"
-            title="유튜브 새창열림"
-            href="//www.youtube.com/channel/UCo8N6hfw4a5PDaiPaeBr4UQ/featured"
-          >
-            <img
-              alt="유튜브"
-              src="//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-youtube.svg"
-            />
-          </a>
-          <a
-            target="blank"
-            title="페이스북 새창열림"
-            href="//www.facebook.com/jumpit.ITjump"
-          >
-            <img
-              alt="페이스북"
-              src="//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-facebook.svg"
-            />
-          </a>
-          <a
-            target="blank"
-            title="플레이스토어 새창열림"
-            href="//play.google.com/store/apps/details?id=kr.co.saramin.jumpit"
-          >
-            <img
-              alt="플레이스토어"
-              src="//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-google.svg"
-            />
-          </a>
-          <a
-            target="blank"
-            title="앱스토어 새창열림"
-            href="//apps.apple.com/app/id1552125375"
-          >
-            <img
-              alt="앱스토어"
-              src="//cdn.jumpit.co.kr/jumpit/personal/v-footer-sns-apple.svg"
-            />
-          </a>
+          {FOOTER_ICONS.map(({ title, href, src }, i) => (
+            <a
+              target="blank"
+              rel="noreferrer noopener"
+              title={title}
+              href={href}
+              key={i}
+            >
+              <img alt={title} src={src} />
+            </a>
+          ))}
         </dd>
       </dl>
 
       <div className="footerLinks">
         <ul className="links">
-          <li>
-            <a target="blank" title="새창열림" href="/hello">
-              서비스 소개
-            </a>
-          </li>
-          <li>
-            <a
-              target="blank"
-              title="기업서비스 새창열림"
-              href="//biz.jumpit.co.kr"
-            >
-              기업 서비스
-            </a>
-          </li>
-          <li>
-            <a
-              target="blank"
-              title="점핏 블로그 새창열림"
-              href="//team.jumpit.co.kr"
-            >
-              점핏Team
-            </a>
-          </li>
+          {FOOTER_LINKS[0].map(({ title, href }, i) => (
+            <li key={i}>
+              <a
+                target="blank"
+                rel="noreferrer noopener"
+                title={title}
+                href={href}
+              >
+                {title}
+              </a>
+            </li>
+          ))}
         </ul>
-        {/* right */}
         <ul className="links">
-          <li>
-            <a target="blank" title="새창열림" href="/policy/terms">
-              이용약관
-            </a>
-          </li>
-          <li>
-            <a target="blank" title="새창열림" href="/policy/private">
-              <b>개인정보처리방침</b>
-            </a>
-          </li>
-          <li>
-            <a
-              target="blank"
-              title="자주묻는질문 FAQ 새창열림"
-              href="//team.jumpit.co.kr/e8154e47-4105-42fa-b374-39181297ed35"
-            >
-              자주묻는질문 FAQ
-            </a>
-          </li>
+          {FOOTER_LINKS[1].map(({ title, href }, i) => (
+            <li key={i}>
+              <a
+                target="blank"
+                rel="noreferrer noopener"
+                title={title}
+                href={href}
+              >
+                {title}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </footer>

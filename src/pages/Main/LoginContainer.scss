@@ -15,6 +15,7 @@
     line-height: 1.3;
     cursor: default;
   }
+
   .loginButton {
     height: 48px;
     font-size: 15px;
@@ -32,12 +33,14 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
     p {
       font-size: 14px;
       font-weight: 500;
       color: #666666;
       cursor: default;
     }
+
     img {
       width: 32px;
       height: 32px;

@@ -2,6 +2,8 @@ import React from 'react';
 import { GrClose } from 'react-icons/gr';
 import './LoginModal.scss';
 
+const BASE_URL = process.env.REACT_APP_API_KEY;
+
 export default function LoginModal({
   handleModal,
   email,
@@ -9,7 +11,7 @@ export default function LoginModal({
   emailIsValid,
 }) {
   const handleClick = () => {
-    fetch('/data/data.json', {
+    fetch(`${BASE_URL}/users/presignin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

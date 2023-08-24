@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GrClose } from 'react-icons/gr';
+import { passwordPattern } from '../../../util/constants';
 import './Modals.scss';
+
+const BASE_URL = process.env.REACT_APP_API_KEY;
 
 export default function ModalPassword({ email, handleModal }) {
   const [password, setPassword] = useState('');
 
-  const passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
   const isValidPassword = passwordPattern.test(password);
 
   const closeModal = () => {
@@ -19,7 +20,7 @@ export default function ModalPassword({ email, handleModal }) {
   };
 
   const handlePostUserInfo = () => {
-    fetch('API주소', {
+    fetch(`${BASE_URL}/users/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

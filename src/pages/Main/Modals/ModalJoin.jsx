@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { GrClose } from 'react-icons/gr';
+import {
+  emailPattern,
+  koreanRegex,
+  passwordPattern,
+} from '../../../util/constants';
 import './Modals.scss';
+
+const BASE_URL = process.env.REACT_APP_API_KEY;
 
 export default function ModalJoin({ handleModal, email }) {
   const [joinUserInfo, setJoinUserInfo] = useState({
@@ -20,9 +27,10 @@ export default function ModalJoin({ handleModal, email }) {
     agreement2: false,
     agreement3: false,
   });
+  const { agreement1, agreement2, agreement3 } = agreements;
 
   const handleOnSubmit = () => {
-    fetch('API주소', {
+    fetch(`${BASE_URL}/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -55,44 +63,37 @@ export default function ModalJoin({ handleModal, email }) {
     }));
   };
 
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const { username, password } = joinUserInfo;
+
   const emailIsValid = emailPattern.test(joinUserInfo.email);
-  const koreanRegex = /^[가-힣]{2,}$/;
-  const usernameIsValid = koreanRegex.test(joinUserInfo.username);
-  const passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
-  const passwordIsValid = passwordPattern.test(joinUserInfo.password);
+  const usernameIsValid = koreanRegex.test(username);
+  const passwordIsValid = passwordPattern.test(password);
 
   const handleCheckboxChange = e => {
     const { id } = e.target;
-    let bln = !agreements[id];
     setAgreements(prev => ({
       ...prev,
-      [id]: bln,
+      [id]: !agreements[id],
     }));
   };
 
   const handleAllCheckboxChange = () => {
-    let bln =
-      agreements.agreement1 &&
-      agreements.agreement2 &&
-      agreements.agreement3 &&
-      joinUserInfo.agreement;
+    const agreementsBln =
+      agreement1 && agreement2 && agreement3 && joinUserInfo.agreement;
     setAgreements(prev => ({
       ...prev,
-      agreement1: !bln,
-      agreement2: !bln,
-      agreement3: !bln,
+      agreement1: !agreementsBln,
+      agreement2: !agreementsBln,
+      agreement3: !agreementsBln,
     }));
-    let smsBln = joinUserInfo.agreement === 0 ? 1 : 0;
+    const smsBln = !agreementsBln ? 1 : 0;
     setJoinUserInfo(prev => ({
       ...prev,
       agreement: smsBln,
     }));
   };
 
-  const allRequiredChecked =
-    agreements.agreement1 && agreements.agreement2 && agreements.agreement3;
+  const allRequiredChecked = agreement1 && agreement2 && agreement3;
   const radioIsValid = joinUserInfo.privateDataPeriod !== '';
 
   const userInfoIsValid =
@@ -178,7 +179,7 @@ export default function ModalJoin({ handleModal, email }) {
                 className="checkbox"
                 type="checkbox"
                 id="agreement1"
-                checked={agreements.agreement1}
+                checked={agreement1}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="agreement1">
@@ -190,7 +191,7 @@ export default function ModalJoin({ handleModal, email }) {
                 className="checkbox"
                 type="checkbox"
                 id="agreement2"
-                checked={agreements.agreement2}
+                checked={agreement2}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="agreement2">
@@ -202,7 +203,7 @@ export default function ModalJoin({ handleModal, email }) {
                 className="checkbox"
                 type="checkbox"
                 id="agreement3"
-                checked={agreements.agreement3}
+                checked={agreement3}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="agreement3">
