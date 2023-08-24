@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PositionBtn.scss';
 
-export default function PositionBtn({ handleTechClick, jobGroup }) {
+export default function PositionBtn({ handleTechClick, jobGroup, onClick }) {
   const [clicked, setClicked] = useState(false);
   function handleClick() {
     setClicked(prev => !prev);
@@ -10,6 +10,7 @@ export default function PositionBtn({ handleTechClick, jobGroup }) {
     <button
       className={`positionBtn ${clicked ? 'clicked' : ''}`}
       onClick={() => {
+        onClick();
         handleClick();
         handleTechClick();
       }}

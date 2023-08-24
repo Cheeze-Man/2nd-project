@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './Positions.scss';
 import Nav from '../../components/Nav.jsx';
 import Card from '../../components/Card.jsx';
 import PositionBtn from '../Positions/PositionBtn.jsx';
 import PositionTechBtn from '../Positions/PositionTechBtn.jsx';
+import './Positions.scss';
 
 export default function Positions() {
   const [openTech, setOpenTech] = useState(false);
@@ -20,37 +20,21 @@ export default function Positions() {
 
   const { jobGroup, jobIndex, jobType } = jobData;
 
-  const hyungmin = () => {
-    // fetch('', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     id: jobGroup,
-    //     title: jobIndex,
-    //     job_type_id: jobType,
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(job => {
-    //     setJobData(job);
-    //   });
-  };
-
-  // useEffect(() => {
-  //   fetch('', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({
-  //       id: jobGroup,
-  //       title: jobIndex,
-  //       job_type_id: jobType,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(job => {
-  //       setJobData(job);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch('', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: jobGroup,
+        title: jobIndex,
+        job_type_id: jobType,
+      }),
+    })
+      .then(response => response.json())
+      .then(job => {
+        setJobData(job);
+      });
+  }, []);
 
   const [techData, setTechData] = useState({
     techImg: '',
@@ -59,7 +43,7 @@ export default function Positions() {
 
   const { techImg, techList } = techData;
 
-  useEffect(() => {
+  const techBtnClick = () => {
     fetch('', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -72,7 +56,7 @@ export default function Positions() {
       .then(tech => {
         setTechData(tech);
       });
-  }, []);
+  };
 
   const [cardData, setCardData] = useState({
     urlLink: '',
@@ -86,7 +70,7 @@ export default function Positions() {
   const { urlLink, imgSrc, name, title, location, career } = cardData;
 
   useEffect(() => {
-    fetch('http://10.58.52.220:3000/positions/jobPostings')
+    fetch('')
       .then(response => response.json())
       .then(data => {
         setCardData(data);
@@ -100,7 +84,11 @@ export default function Positions() {
         <div className="positionSearch">직무 탐색</div>
         <div className="positionList">
           {/* 추후 advanced router세션 이후 기능 구현할 것 */}
-          <PositionBtn handleTechClick={handleTechClick} title={jobGroup} />
+          <PositionBtn
+            handleTechClick={handleTechClick}
+            title={jobGroup}
+            onClick={techBtnClick}
+          />
         </div>
         {openTech && (
           <div>
