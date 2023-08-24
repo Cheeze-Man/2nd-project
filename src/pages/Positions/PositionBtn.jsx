@@ -4,12 +4,11 @@ import './PositionBtn.scss';
 export default function PositionBtn({ handleTechClick, jobGroup }) {
   const [clicked, setClicked] = useState(false);
   function handleClick() {
-    setClicked(!clicked);
+    setClicked(prev => !prev);
   }
-
   return (
     <button
-      className={'positionBtn ' + (clicked ? 'clicked' : '')}
+      className={`positionBtn ${clicked ? 'clicked' : ''}`}
       onClick={() => {
         handleClick();
         handleTechClick();

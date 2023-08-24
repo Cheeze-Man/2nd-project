@@ -3,8 +3,14 @@ import { FiSearch, FiChevronDown } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
 const NAV_CATEGORIES = [
-  ['직무 탐색', '/positions'],
-  ['이력서', '/resume'],
+  {
+    title: '직무탐색',
+    path: '/positions',
+  },
+  {
+    title: '이력서',
+    path: '/resume',
+  },
 ];
 export default function Nav() {
   return (
@@ -22,9 +28,9 @@ export default function Nav() {
       </div>
       <div className="navBottom">
         <div className="categories">
-          {NAV_CATEGORIES.map(([name, path]) => (
-            <Link to={path} key={name} className="categoryLink">
-              {name}
+          {NAV_CATEGORIES.map(({ title, path }, i) => (
+            <Link to={path} key={i} className="categoryLink">
+              {title}
             </Link>
           ))}
         </div>
