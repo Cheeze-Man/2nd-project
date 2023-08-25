@@ -4,20 +4,25 @@ import './LoginContainer.scss';
 export default function LoginContainer({ handleModal }) {
   const token = localStorage.getItem('token');
 
+  const email = localStorage.getItem('email');
+  const username = localStorage.getItem('username');
+
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('username');
     window.location.reload();
   };
 
   return token ? (
     <div className="loginContainer">
       <div className="loginContainerUserName">
-        <p className="loginAnnouncement">회원님 반가워요</p>
+        <p className="loginAnnouncement">{username}님 반가워요</p>
         <p className="logoutButton" onClick={handleLogout}>
           로그아웃
         </p>
       </div>
-      <p className="loginContainerUserEmail">email@email.com</p>
+      <p className="loginContainerUserEmail">{email}</p>
       <div className="loginMenus">
         <div className="loginMenu">
           <p>📝</p>

@@ -3,18 +3,12 @@ import { emailPattern } from '../../util/constants';
 import LoginModal from './LoginModal';
 import ModalPassword from './Modals/ModalPassword';
 import ModalJoin from './Modals/ModalJoin';
-import Nav from '../../components/Nav/Nav';
 import BannerContainer from './BannerContainer';
 import LoginContainer from './LoginContainer';
-import Footer from '../../components/Footer/Footer';
 import CollectionByTheme from './CollectionByTheme';
 import './Main.scss';
 
-const BASE_URL = process.env.REACT_APP_API_KEY;
-
 export default function Main() {
-  const token = localStorage.getItem('token');
-
   const [email, setEmail] = useState('');
   const emailIsValid = emailPattern.test(email);
 
@@ -23,17 +17,6 @@ export default function Main() {
   const handleModal = status => {
     setModalStatus(status);
   };
-
-  //토큰 유무에 따른 조건문 필요한가..?
-  useEffect(() => {
-    fetch(`${BASE_URL}/users/presignin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({ accessToken: token }),
-    }).then(res => res.json());
-  }, []);
 
   const MODAL_MAP = {
     login: (
@@ -53,7 +36,6 @@ export default function Main() {
   return (
     <div className="main">
       {MODAL_MAP[modalStatus]}
-      <Nav />
       <div className="mainTop">
         <BannerContainer />
         <div className="mainTopRight">
@@ -74,7 +56,6 @@ export default function Main() {
         </div>
       </div>
       <CollectionByTheme />
-      <Footer />
     </div>
   );
 }

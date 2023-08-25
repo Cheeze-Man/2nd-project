@@ -3,11 +3,11 @@
 .nav {
   width: 100%;
   height: 120px;
+  padding: 0 15%;
   border-bottom: 1px solid rgb(214, 214, 214);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-bottom: 40px;
 
   .navTop {
     display: flex;
@@ -15,8 +15,9 @@
     align-items: center;
 
     img {
-      width: 72px;
-      height: 32px;
+      width: 100px;
+      height: 50px;
+      cursor: pointer;
     }
 
     .searchBar {
@@ -59,12 +60,29 @@
 
     .userServise {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       gap: 5px;
 
       .iconDown {
         &:hover {
           transform: rotate(180deg);
         }
+      }
+
+      .userInfo {
+        .userInfoLink,
+        span {
+          color: black;
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+      .companyService {
+        color: #222222;
+        font-size: 15px;
+        font-weight: 500;
       }
     }
   }

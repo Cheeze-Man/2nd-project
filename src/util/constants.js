@@ -4,5 +4,3 @@ export const koreanRegex = /^[가-힣]{2,}$/;
 
 export const passwordPattern =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
-
-// export const phonePattern = /^[0-9]{10,11}$/;

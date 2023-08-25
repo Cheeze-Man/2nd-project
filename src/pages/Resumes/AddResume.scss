@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+@media (max-width: 1080px) {
+  .addResume {
+    width: 48%;
+  }
+}
+
+.addResume {
+  width: 48%;
+  width: 32%;
+  height: 180px;
+  padding: 20px;
+  background-color: #f5f5f8;
+  border-radius: 12px;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  .plusIconDiv {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: White;
+    background-color: $green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .addResumeMessage {
+    columns: #444444;
+    font-size: 13px;
+    color: #444444;
+  }
+}

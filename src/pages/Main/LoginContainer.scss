@@ -14,15 +14,24 @@
     align-items: center;
 
     .logoutButton {
-      padding: 5px;
+      padding: 5px 10px;
       color: #999999;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       cursor: pointer;
     }
   }
 
   .loginContainerUserEmail {
+    font-family:
+      Montserrat,
+      'Noto Sans KR',
+      -apple-system,
+      system-ui,
+      'Apple SD Gothic Neo',
+      'Malgun Gothic',
+      'Nanum Gothic',
+      sans-serif;
     color: #666666;
     margin-top: -40px;
   }

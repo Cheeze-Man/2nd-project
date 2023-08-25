@@ -1,18 +1,34 @@
 import React from 'react';
 import { FiSearch, FiChevronDown } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Nav.scss';
 
 const NAV_CATEGORIES = [
-  ['직무 탐색', '/jobsearch'],
-  ['이력서', '/resume'],
+  {
+    title: '직무 탐색',
+    path: '/jobsearch',
+  },
+  {
+    title: '이력서',
+    path: '/resumes',
+  },
 ];
 
 export default function Nav() {
+  const navigate = useNavigate();
+
+  const username = localStorage.getItem('username');
+
   return (
     <nav className="nav">
       <div className="navTop">
-        <img src="images/logo.png" alt="점핏." />
+        <img
+          src="images/logo.png"
+          alt="점핏."
+          onClick={() => {
+            navigate('/');
+          }}
+        />
         <div className="searchBar">
           <FiSearch className="searchIcon" />
           <input
@@ -24,22 +40,25 @@ export default function Nav() {
       </div>
       <div className="navBottom">
         <div className="categories">
-          {NAV_CATEGORIES.map(([name, path]) => (
-            <Link to={path} key={name} className="categoryLink">
-              {name}
+          {NAV_CATEGORIES.map(({ title, path }, i) => (
+            <Link to={path} key={i} className="categoryLink">
+              {title}
             </Link>
           ))}
         </div>
         <div className="userServise">
           <div className="userInfo">
             <Link to="#" className="userInfoLink">
-              ㅇㅇㅇ
+              {username}
             </Link>
             <span> 님 </span>
             <FiChevronDown className="iconDown" />
             <span>ㆍ</span>
           </div>
-          <Link to="#"> 기업 서비스</Link>
+          <Link to="#" className="companyService">
+            {' '}
+            기업 서비스
+          </Link>
         </div>
       </div>
     </nav>

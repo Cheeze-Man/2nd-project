@@ -34,6 +34,8 @@ export default function ModalPassword({ email, handleModal }) {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('token', data.accessToken);
+          localStorage.setItem('email', data.email);
+          localStorage.setItem('username', data.username);
           closeModal();
         } else {
           const message = data.message;

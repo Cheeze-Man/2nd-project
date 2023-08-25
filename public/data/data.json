@@ -1,5 +1,26 @@
 [
   {
-    "user": "admin@gmail.com"
+    "createdAt": "2023.08.24",
+    "display": 0,
+    "resumeId": 9,
+    "title": "박동철이력서_230825"
+  },
+  {
+    "createdAt": "2023.08.24",
+    "display": 0,
+    "resumeId": 8,
+    "title": "테스트이력서_230825"
+  },
+  {
+    "createdAt": "2023.08.24",
+    "display": 1,
+    "resumeId": 7,
+    "title": "테스트이력서_230824"
+  },
+  {
+    "createdAt": "2023.08.24",
+    "display": 1,
+    "resumeId": 6,
+    "title": "테스트이력서_230823"
   }
 ]

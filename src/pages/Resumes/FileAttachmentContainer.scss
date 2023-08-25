@@ -1,0 +1,67 @@
+@import '../../styles/variables.scss';
+
+.fileAttachmentContainer {
+  background-color: #ffffff;
+  margin: 20px auto 20px;
+  padding: 32px 40px 40px;
+  border-radius: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  h1 {
+    color: #222222;
+    font-size: 24px;
+  }
+
+  .fileAttachmentMessage {
+    color: #444444;
+    font-size: 15px;
+  }
+
+  .selectedFile {
+    width: 100%;
+    height: 54px;
+    border: 1px dashed rgb(212, 212, 212);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fileIsNull {
+    color: #a4a4a4;
+    font-size: 15px;
+  }
+
+  .plusIconDiv {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: White;
+    background-color: $green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .plusIcon {
+      font-size: 12px;
+    }
+  }
+
+  .fileInputButton {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: #444444;
+    font-weight: 500;
+    cursor: pointer;
+    width: 13%;
+  }
+
+  .fileInput {
+    display: none;
+  }
+}
