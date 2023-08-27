@@ -5,7 +5,7 @@ import './ResumeCard.scss';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
 
-export default function ResumeCard({ resume }) {
+export default function ResumeCard({ resume, onClick }) {
   const [resumeInfo, setResumeInfo] = useState(resume);
   const [isActive, setIsActive] = useState(resumeInfo.display);
 
@@ -31,7 +31,7 @@ export default function ResumeCard({ resume }) {
   };
 
   return (
-    <div className="resumeCard">
+    <div className="resumeCard" onClick={onClick}>
       <HiOutlineDotsVertical className="threeDotsVertical" />
       <div className="resumeCardTop">
         <h3 className="resumeCardTitle">{resumeInfo.title}</h3>

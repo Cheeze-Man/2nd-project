@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './Resumes.scss';
+import { useNavigate } from 'react-router-dom';
+import FileAttachmentContainer from './FileAttachmentContainer';
 import ResumeCard from './ResumeCard';
 import AddResume from './AddResume';
-import FileAttachmentContainer from './FileAttachmentContainer';
+import './Resumes.scss';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
 
 export default function Resumes() {
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   const [resumes, setResumes] = useState([]);
 
@@ -33,7 +35,15 @@ export default function Resumes() {
         <h1 className="resumeCardsContainerTitle">이력서 관리</h1>
         <div className="resumeCardPlace">
           {resumes.map((resume, _) => {
-            return <ResumeCard key={resume.resumeId} resume={resume} />;
+            return (
+              <ResumeCard
+                key={resume.resumeId}
+                resume={resume}
+                onClick={() => {
+                  navigate(`/resume/${resume.resumeId}`);
+                }}
+              />
+            );
           })}
           <AddResume />
         </div>
