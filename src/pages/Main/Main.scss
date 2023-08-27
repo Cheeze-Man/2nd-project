@@ -2,10 +2,12 @@
 
 .main {
   position: relative;
-  padding: 40px 15% 0;
-  z-index: 1;
+  padding-top: 120px;
+  padding-bottom: 0.1px;
 
   .mainTop {
+    width: 1060px;
+    margin: 40px auto 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -1,88 +1,101 @@
 @import '../../styles/variables.scss';
-
-.nav {
+#header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
   width: 100%;
-  height: 120px;
-  padding: 0 15%;
-  border-bottom: 1px solid rgb(214, 214, 214);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  border-bottom: 1px solid rgb(228, 228, 228);
 
-  .navTop {
+  .nav {
+    // height: 120px;
+    position: relative;
+    max-width: 1060px;
+    margin: 0px auto;
+    // border-bottom: 1px solid rgb(214, 214, 214);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 
-    img {
-      width: 100px;
-      height: 50px;
-      cursor: pointer;
-    }
-
-    .searchBar {
-      width: 520px;
-      height: 40px;
+    .navTop {
+      height: 64px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      border: 1px solid $green;
-      border-radius: 100px;
 
-      .searchIcon {
-        color: $green;
-        width: 24px;
-        height: 24px;
-        margin-left: 15px;
-        margin-right: 5px;
+      img {
+        width: 100px;
+        height: 50px;
         cursor: pointer;
       }
-    }
-    .seachBarInput {
-      width: 100%;
-      margin-right: 15px;
-      border: none;
-      outline: none;
-      font-size: 15px;
-    }
-  }
 
-  .navBottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+      .searchBar {
+        width: 520px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $green;
+        border-radius: 100px;
 
-    .categories {
-      .categoryLink {
-        margin-right: 40px;
-        color: black;
+        .searchIcon {
+          color: $green;
+          width: 24px;
+          height: 24px;
+          margin-left: 15px;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+      .seachBarInput {
+        width: 100%;
+        margin-right: 15px;
+        border: none;
+        outline: none;
+        font-size: 15px;
       }
     }
 
-    .userServise {
+    .navBottom {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      text-align: center;
-      gap: 5px;
+      height: 56px;
 
-      .iconDown {
-        &:hover {
-          transform: rotate(180deg);
+      .categories {
+        .categoryLink {
+          margin-right: 40px;
+          color: black;
         }
       }
 
-      .userInfo {
-        .userInfoLink,
-        span {
-          color: black;
+      .userServise {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+
+        .iconDown {
+          &:hover {
+            transform: rotate(180deg);
+          }
+        }
+
+        .userInfo {
+          .userInfoLink,
+          span {
+            color: black;
+            font-size: 15px;
+            font-weight: 500;
+          }
+        }
+        .companyService {
+          color: #222222;
           font-size: 15px;
           font-weight: 500;
         }
-      }
-      .companyService {
-        color: #222222;
-        font-size: 15px;
-        font-weight: 500;
       }
     }
   }

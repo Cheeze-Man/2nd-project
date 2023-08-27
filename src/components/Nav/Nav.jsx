@@ -20,47 +20,50 @@ export default function Nav() {
   const username = localStorage.getItem('username');
 
   return (
-    <nav className="nav">
-      <div className="navTop">
-        <img
-          src="images/logo.png"
-          alt="점핏."
-          onClick={() => {
-            navigate('/');
-          }}
-        />
-        <div className="searchBar">
-          <FiSearch className="searchIcon" />
-          <input
-            className="seachBarInput"
-            type="text"
-            placeholder="검색어를 입력해주세요"
+    <header id="header">
+      <nav className="nav">
+        <div className="navTop">
+          <img
+            src="images/logo.png"
+            alt="점핏."
+            onClick={() => {
+              navigate('/');
+            }}
           />
-        </div>
-      </div>
-      <div className="navBottom">
-        <div className="categories">
-          {NAV_CATEGORIES.map(({ title, path }, i) => (
-            <Link to={path} key={i} className="categoryLink">
-              {title}
-            </Link>
-          ))}
-        </div>
-        <div className="userServise">
-          <div className="userInfo">
-            <Link to="#" className="userInfoLink">
-              {username}
-            </Link>
-            <span> 님 </span>
-            <FiChevronDown className="iconDown" />
-            <span>ㆍ</span>
+          <div className="searchBar">
+            <FiSearch className="searchIcon" />
+            <input
+              className="seachBarInput"
+              type="text"
+              placeholder="검색어를 입력해주세요"
+            />
           </div>
-          <Link to="#" className="companyService">
-            {' '}
-            기업 서비스
-          </Link>
         </div>
-      </div>
-    </nav>
+        <div className="navBottom">
+          <div className="categories">
+            {NAV_CATEGORIES.map(({ title, path }, i) => (
+              <Link to={path} key={i} className="categoryLink">
+                {title}
+              </Link>
+            ))}
+          </div>
+          <div className="userServise">
+            <div className="userInfo">
+              <Link to="#" className="userInfoLink">
+                {username}
+              </Link>
+              <span> 님 </span>
+              <FiChevronDown className="iconDown" />
+              <span>ㆍ</span>
+            </div>
+            <Link to="#" className="companyService">
+              {' '}
+              기업 서비스
+            </Link>
+          </div>
+        </div>
+        <div className="navbottomLine" />
+      </nav>
+    </header>
   );
 }

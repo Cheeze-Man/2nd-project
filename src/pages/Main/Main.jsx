@@ -34,7 +34,7 @@ export default function Main() {
   };
 
   return (
-    <div className="main">
+    <main className="main">
       {MODAL_MAP[modalStatus]}
       <div className="mainTop">
         <BannerContainer />
@@ -56,6 +56,6 @@ export default function Main() {
         </div>
       </div>
       <CollectionByTheme />
-    </div>
+    </main>
   );
 }

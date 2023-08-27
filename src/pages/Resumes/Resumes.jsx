@@ -38,7 +38,7 @@ export default function Resumes() {
           <AddResume />
         </div>
       </div>
-      <div className="resumeAddContainer">
+      <div className="resumeAdContainer">
         <img
           src="https://cdn.jumpit.co.kr/jumpit/resume/awesome_resume_banner.webp"
           alt="이력서 광고 배너"
