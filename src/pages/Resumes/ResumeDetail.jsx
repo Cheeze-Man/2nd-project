@@ -83,7 +83,7 @@ const token = localStorage.getItem('token');
 export default function ResumeDetail() {
   const { resumeId } = useParams();
   const [resumeData, setResumeData] = useState({
-    userId: '',
+    userId: null,
     title: '새로운 이력서',
     display: 0,
     githubUrl: LINKS[0].value,
@@ -121,17 +121,21 @@ export default function ResumeDetail() {
     ],
     addfile: [
       {
-        originFileName: 'dd',
-        uploadedFileName: 'dd',
-        fileUrl: '',
-      },
-      {
         originFileName: '',
         uploadedFileName: '',
         fileUrl: '',
       },
     ],
   });
+  const [isActive, setIsActive] = useState(resumeData.display);
+
+  const handleDisplay = () => {
+    setIsActive(!isActive);
+    setResumeData(prev => ({
+      ...prev,
+      display: prev.display === 1 ? 0 : 1,
+    }));
+  };
 
   const handleAddEducation = () => {
     setResumeData(prev => ({
@@ -215,6 +219,61 @@ export default function ResumeDetail() {
     }));
   };
 
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setResumeData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleEducation = (e, i) => {
+    const { name, value } = e.target;
+
+    setResumeData(prev => {
+      const updatedEducation = [...prev.education];
+      updatedEducation[i] = { ...updatedEducation[i], [name]: value };
+
+      return {
+        ...prev,
+        education: updatedEducation,
+      };
+    });
+  };
+
+  const handleCareer = (e, i) => {
+    const { name, value, type, checked } = e.target;
+
+    setResumeData(prev => {
+      const updatedCareer = [...prev.career];
+      if (type === 'checkbox') {
+        updatedCareer[i] = { ...updatedCareer[i], [name]: checked ? 0 : 1 };
+      } else {
+        updatedCareer[i] = { ...updatedCareer[i], [name]: value };
+      }
+
+      return {
+        ...prev,
+        career: updatedCareer,
+      };
+    });
+  };
+
+  const handleProject = (e, i) => {
+    const { name, value } = e.target;
+
+    setResumeData(prev => {
+      const updatedProject = [...prev.project];
+      updatedProject[i] = { ...updatedProject[i], [name]: value };
+
+      return {
+        ...prev,
+        project: updatedProject,
+      };
+    });
+  };
+  console.log(resumeData);
+
   //${BASE_URL}/resumes/${resumeId}
   // useEffect(() => {
   //   fetch(`/data/data.json`,{
@@ -231,10 +290,8 @@ export default function ResumeDetail() {
   const handleResumePost = () => {
     fetch(`${BASE_URL}/resumes`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({ accessToken: token, resumeData: resumeData }),
+      headers: JSON.stringify({ accessToken: token }),
+      body: JSON.stringify(resumeData),
     })
       .then(res => res.json())
       .then(data => console.log(data));
@@ -292,7 +349,16 @@ export default function ResumeDetail() {
           </div>
         </div>
         <div className="resumeCenter">
-          <div className="resumeTitle">{resumeData.title}</div>
+          <div className="resumeTitle">
+            <input
+              className="titleInput"
+              type="text"
+              maxLength={25}
+              name="title"
+              value={resumeData.title}
+              onChange={handleInputChange}
+            />
+          </div>
 
           <div className="resumeContent">
             <div className="userInfos">
@@ -341,7 +407,16 @@ export default function ResumeDetail() {
                       placeholder="00000000000"
                     />
                   </div>
-                  <div className="display">이력서 공개</div>
+                  <div className="displayToggle">
+                    <button
+                      className={`toggle-button ${isActive ? 'active' : ''}`}
+                      onClick={handleDisplay}
+                    >
+                      <div className="slider"></div>
+                    </button>
+                    <span>{resumeData.display ? '공개' : '비공개'}</span>
+                    <div className="questionMark">?</div>
+                  </div>
                 </div>
                 <div className="basicInfoMessage">
                   · 지원 현황에 대한 정보 및 포지션 추천정보를 받아볼 연락처를
@@ -378,6 +453,7 @@ export default function ResumeDetail() {
                       placeholder={placeholder}
                       name={name}
                       value={value}
+                      onChange={handleInputChange}
                     />
                   </div>
                 </div>
@@ -396,6 +472,7 @@ export default function ResumeDetail() {
                         name="graduatedYear"
                         placeholder="YYYY"
                         value={education.graduatedYear}
+                        onChange={e => handleEducation(e, i)}
                       />
                       .
                       <input
@@ -404,13 +481,19 @@ export default function ResumeDetail() {
                         name="graduatedMonth"
                         placeholder="MM"
                         value={education.graduatedMonth}
+                        onChange={e => handleEducation(e, i)}
                       />
                     </div>
                     <p>졸업(예정)</p>
                   </div>
                   <div className="whereSchool">
                     <div className="schoolInfo">
-                      <select name="schoolType" className="schoolType">
+                      <select
+                        name="schoolType"
+                        className="schoolType"
+                        value={education.schoolType}
+                        onChange={e => handleEducation(e, i)}
+                      >
                         <option
                           disabled
                           selected
@@ -430,6 +513,8 @@ export default function ResumeDetail() {
                         className="schoolName"
                         name="schoolName"
                         placeholder="학교명을 입력해주세요."
+                        value={education.schoolName}
+                        onChange={e => handleEducation(e, i)}
                       />
                     </div>
                   </div>
@@ -458,6 +543,8 @@ export default function ResumeDetail() {
                         className="year"
                         placeholder="YYYY"
                         value={career.startYear}
+                        name="startYear"
+                        onChange={e => handleCareer(e, i)}
                       />
                       .
                       <input
@@ -465,6 +552,8 @@ export default function ResumeDetail() {
                         className="month"
                         placeholder="MM"
                         value={career.startMonth}
+                        name="startMonth"
+                        onChange={e => handleCareer(e, i)}
                       />
                       -
                       <input
@@ -472,6 +561,8 @@ export default function ResumeDetail() {
                         className="year"
                         placeholder="YYYY"
                         value={career.endYear}
+                        name="endYear"
+                        onChange={e => handleCareer(e, i)}
                       />
                       .
                       <input
@@ -479,6 +570,8 @@ export default function ResumeDetail() {
                         className="month"
                         placeholder="MM"
                         value={career.endMonth}
+                        name="endMonth"
+                        onChange={e => handleCareer(e, i)}
                       />
                     </div>
                   </div>
@@ -489,6 +582,8 @@ export default function ResumeDetail() {
                         className="companyName"
                         placeholder="회사명을 입력해주세요"
                         value={career.companyName}
+                        name="companyName"
+                        onChange={e => handleCareer(e, i)}
                       />
                       <div className="buttonSection">
                         <div>
@@ -496,6 +591,8 @@ export default function ResumeDetail() {
                             type="checkbox"
                             className="notDeveloper"
                             checked={!career.developer}
+                            name="developer"
+                            onChange={e => handleCareer(e, i)}
                           />
                           <span>비개발</span>
                         </div>
@@ -512,12 +609,16 @@ export default function ResumeDetail() {
                       className="careerInput"
                       placeholder="부서명"
                       value={career.divison}
+                      name="divison"
+                      onChange={e => handleCareer(e, i)}
                     />
                     <input
                       type="text"
                       className="careerInput"
                       placeholder="직책"
                       value={career.role}
+                      name="role"
+                      onChange={e => handleCareer(e, i)}
                     />
                   </div>
                 </div>
@@ -538,28 +639,36 @@ export default function ResumeDetail() {
                         type="number"
                         className="year"
                         placeholder="YYYY"
+                        name="startYear"
                         value={project.startYear}
+                        onChange={e => handleProject(e, i)}
                       />
                       .
                       <input
                         type="number"
                         className="month"
                         placeholder="MM"
+                        name="startMonth"
                         value={project.startMonth}
+                        onChange={e => handleProject(e, i)}
                       />
                       -
                       <input
                         type="number"
                         className="year"
                         placeholder="YYYY"
+                        name="endYear"
                         value={project.endYear}
+                        onChange={e => handleProject(e, i)}
                       />
                       .
                       <input
                         type="number"
                         className="month"
                         placeholder="MM"
+                        name="endMonth"
                         value={project.endMonth}
+                        onChange={e => handleProject(e, i)}
                       />
                     </div>
                   </div>
@@ -569,7 +678,9 @@ export default function ResumeDetail() {
                         type="text"
                         className="companyName"
                         placeholder="프로젝트명을 입력해주세요"
+                        name="projectName"
                         value={project.projectName}
+                        onChange={e => handleProject(e, i)}
                       />
                       <div className="buttonSection">
                         <button
@@ -580,11 +691,14 @@ export default function ResumeDetail() {
                         </button>
                       </div>
                     </div>
+                    <p className="repoLinkPtag">저장소 링크</p>
                     <input
                       type="text"
                       className="projectInput"
                       placeholder="https://github.com"
+                      name="repositoryLink"
                       value={project.repositoryLink}
+                      onChange={e => handleProject(e, i)}
                     />
                   </div>
                 </div>
@@ -603,6 +717,11 @@ export default function ResumeDetail() {
                 경험을 보여줄 수 있는 포트폴리오 / 경력기술서 등을 첨부해보세요.
                 (PDF를 권장합니다.)
               </p>
+              {resumeData.addfile.length === 0 && (
+                <ul className="fileItem">
+                  <li className="fileIsNull">첨부파일이 비어있습니다.</li>
+                </ul>
+              )}
               {resumeData.addfile.map((file, i) => (
                 <ul className="fileItem" key={i}>
                   {file.originFileName ? (
@@ -630,6 +749,19 @@ export default function ResumeDetail() {
               <button className="addButton">
                 <span className="plusMark">+</span>
                 첨부파일 추가
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="resumeBottomBar">
+          <div className="barContent">
+            <p className="barMessage">
+              👨‍💻 역량을 표현하는 <span>기술스택</span>을 등록해주세요!
+            </p>
+            <div className="barButtons">
+              <button className="previewButton">미리보기</button>
+              <button className="saveButton" onClick={handleResumePost}>
+                저장하기
               </button>
             </div>
           </div>

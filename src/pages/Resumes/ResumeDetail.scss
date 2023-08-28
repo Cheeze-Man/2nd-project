@@ -139,8 +139,6 @@ input[type='number'] {
     margin-left: 260px;
 
     .resumeTitle {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
       position: relative;
       width: 800px;
@@ -148,7 +146,18 @@ input[type='number'] {
       padding: 22px 40px;
       background-color: #ffffff;
       border-radius: 12px;
-      font-size: 18px;
+
+      .titleInput {
+        width: 100%;
+        font-size: 20px;
+        height: 100%;
+        border: none;
+
+        &:focus,
+        &:hover {
+          background-color: rgb(245, 245, 248);
+        }
+      }
     }
 
     .resumeContent {
@@ -235,6 +244,58 @@ input[type='number'] {
             .phoneNumberInput {
               width: 120px;
               font-size: 15px;
+            }
+
+            .displayToggle {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              color: #444444;
+              font-size: 14px;
+              border-left: 1px solid #999999;
+              padding-left: 20px;
+
+              .toggle-button {
+                display: inline-block;
+                position: relative;
+                border: 1px solid #ccc;
+                background-color: #ffffff;
+                border-radius: 20px;
+                width: 26px;
+                height: 16px;
+                cursor: pointer;
+                overflow: hidden;
+
+                .slider {
+                  position: absolute;
+                  top: 1px;
+                  left: 1px;
+                  width: 50%;
+                  height: 90%;
+                  background-color: #ccc;
+                  transition: all 0.5s ease-in-out;
+                  border-radius: 50%;
+                }
+
+                &.active .slider {
+                  transform: translateX(90%);
+                  background-color: $green;
+                }
+              }
+
+              .questionMark {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 16px;
+                height: 16px;
+                border: 1.5px solid #ccc;
+                color: #ccc;
+                border-radius: 50%;
+                padding: 3px;
+                font-size: 10px;
+                font-weight: 700;
+              }
             }
           }
 
@@ -478,6 +539,11 @@ input[type='number'] {
               justify-content: space-between;
             }
 
+            .repoLinkPtag {
+              font-weight: 500;
+              padding-left: 2px;
+            }
+
             .companyName,
             .projectInput {
               border: none;
@@ -588,6 +654,60 @@ input[type='number'] {
         background-color: $green;
         & svg {
           transform: rotate(23deg);
+        }
+      }
+    }
+  }
+
+  .resumeBottomBar {
+    width: 100%;
+    position: fixed;
+    inset: auto 0px 0px;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid rgb(228, 228, 228);
+    z-index: 3;
+
+    .barContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1060px;
+      margin: 0px auto;
+      padding: 12px 0px;
+
+      .barMessage {
+        font-size: 15px;
+        span {
+          font-weight: 600;
+        }
+      }
+
+      .barButtons {
+        display: flex;
+        button {
+          padding: 0px 16px;
+          width: 164px;
+          height: 48px;
+          border-radius: 300px;
+          font-size: 15px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 12px;
+          letter-spacing: -0.5px;
+        }
+        .previewButton {
+          padding: 0px 13px;
+          border: 1px solid rgb(212, 212, 212);
+          background: rgb(255, 255, 255);
+          color: rgb(51, 51, 51);
+        }
+        .saveButton {
+          border: 1px solid $green;
+          background-color: $green;
+          margin-right: 0;
+          color: #ffffff;
         }
       }
     }

@@ -27,7 +27,6 @@ export default function ResumeCard({ resume, onClick }) {
       ...prev,
       display: prev.display === 1 ? 0 : 1,
     }));
-    console.log(resumeInfo);
   };
 
   return (
