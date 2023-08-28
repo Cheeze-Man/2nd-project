@@ -1,5 +1,36 @@
 @import '../../styles/variables.scss';
 
+// @media (max-width: 1080px) {
+//   .resumeLeft {
+//     visibility: hidden;
+//   }
+//   .resumeCenter {
+//     margin-left: -120px;
+//   }
+// }
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  border: none;
+}
+input[type='number'] {
+  font-size: 15px;
+  line-height: 24px;
+  border: none;
+  outline: none;
+  &::placeholder {
+    font-weight: 500;
+    color: #999999;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: rgb(245, 245, 248);
+  }
+}
+
 .resumeDetail {
   width: 100%;
   height: 100%;
@@ -150,38 +181,231 @@
         .basicInfos {
           color: #222222;
           width: 500px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
 
           .userEmail,
           .careerYear,
           .birthYear,
           .phoneNumber {
             display: flex;
+            align-items: center;
+            gap: 5px;
             svg {
               font-size: 20px;
             }
           }
+
+          .birthYear,
+          .userEmail {
+            padding-right: 15px;
+            border-right: 1px solid #999999;
+          }
+
           .userName {
             font-size: 48px;
+            margin-bottom: 15px;
           }
 
           .basicInfoTop {
+            padding-left: 2px;
             display: flex;
+            gap: 15px;
             width: 500px;
+
+            .careerYearSelect {
+              border: none;
+              outline: none;
+              width: 60px;
+              cursor: pointer;
+            }
           }
 
           .basicInfoBottom {
+            padding-left: 2px;
             display: flex;
+            gap: 15px;
+            text-align: center;
+            align-items: center;
             width: 500px;
+
+            .birthYearInput {
+              width: 60px;
+              font-size: 15px;
+            }
+
+            .phoneNumberInput {
+              width: 120px;
+              font-size: 15px;
+            }
           }
 
-          .birthYearInput {
-            width: 60px;
-            font-size: 15px;
+          .basicInfoMessage {
+            color: #999999;
+            font-size: 13px;
+            line-height: 20px;
+          }
+        }
+      }
+
+      .dvelopmentField,
+      .techStacks {
+        margin-top: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .fieldSelect,
+        .stackInput {
+          width: 100%;
+          height: 48px;
+          font-size: 15px;
+          padding: 0px 16px;
+          border-radius: 8px;
+          background-color: rgb(245, 245, 248);
+          color: rgb(153, 153, 153);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          outline: none;
+          border: none;
+        }
+
+        .fieldSelect {
+          cursor: pointer;
+        }
+      }
+
+      .tableName {
+        margin-top: 55px;
+        padding-bottom: 12px;
+        font-size: 24px;
+        border-bottom: 1px solid #222222;
+      }
+
+      .links {
+        .linkDiv {
+          margin-top: 25px;
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          width: 100%;
+
+          .linkIcon {
+            width: 40px;
+            height: 40px;
           }
 
-          .phoneNumberInput {
-            width: 120px;
-            font-size: 15px;
+          .linkTextBox {
+            .linkTitle {
+              font-size: 15px;
+            }
+
+            .linkInput {
+              border: none;
+              font-size: 18px;
+              outline: none;
+              border-radius: 4px;
+              padding-left: 0;
+              background-color: transparent;
+
+              &::placeholder {
+                font-weight: 500;
+                color: #999999;
+              }
+
+              &:focus,
+              &:hover {
+                background-color: rgb(245, 245, 248);
+              }
+            }
+          }
+        }
+      }
+
+      .education {
+        .educationItem {
+          padding-top: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .WhenGraduated {
+            display: flex;
+            align-items: center;
+
+            .dateInputs {
+              .graduatedYear {
+                width: 40px;
+              }
+              .graduatedMonth {
+                width: 30px;
+              }
+            }
+          }
+
+          .whereSchool {
+            .schoolInfo {
+              display: flex;
+              align-items: center;
+
+              .schoolType,
+              .schoolName {
+                border: none;
+                font-size: 18px;
+                .selectPlaceholder {
+                  color: #999999;
+                }
+              }
+
+              .schoolName {
+                font-weight: 500;
+              }
+            }
+          }
+
+          .deleteEducationButton {
+            border: 1px solid #999999;
+            border-radius: 5px;
+            background-color: transparent;
+            height: 28px;
+            width: 56px;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+              background-color: $green;
+              & svg {
+                transform: rotate(23deg);
+              }
+            }
+          }
+        }
+
+        .addEducationButton {
+          margin: 20px 0;
+          padding-left: 0;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          font-size: 18px;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          .plusMark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: $green;
+            color: #ffffff;
+            font-size: 28px;
+            margin-right: 5px;
           }
         }
       }
