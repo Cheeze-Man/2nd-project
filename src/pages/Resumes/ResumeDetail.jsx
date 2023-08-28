@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GrBriefcase, GrMailOption, GrCalendar, GrPhone } from 'react-icons/gr';
 import { SiGithub, SiNotion, SiBlogger } from 'react-icons/si';
-import { TbTrash } from 'react-icons/tb';
+import { TbTrash, TbFolderDown } from 'react-icons/tb';
 import './ResumeDetail.scss';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
@@ -78,6 +78,7 @@ const LINKS = [
 
 const userName = localStorage.getItem('username');
 const userEmail = localStorage.getItem('email');
+const token = localStorage.getItem('token');
 
 export default function ResumeDetail() {
   const { resumeId } = useParams();
@@ -105,7 +106,7 @@ export default function ResumeDetail() {
         companyName: '',
         divison: '',
         role: '',
-        developer: 0,
+        developer: 1,
       },
     ],
     project: [
@@ -119,6 +120,11 @@ export default function ResumeDetail() {
       },
     ],
     addfile: [
+      {
+        originFileName: 'dd',
+        uploadedFileName: 'dd',
+        fileUrl: '',
+      },
       {
         originFileName: '',
         uploadedFileName: '',
@@ -141,6 +147,40 @@ export default function ResumeDetail() {
       ],
     }));
   };
+  const handleAddCareer = () => {
+    setResumeData(prev => ({
+      ...prev,
+      career: [
+        ...prev.career,
+        {
+          startYear: '',
+          startMonth: '',
+          endYear: '',
+          endMonth: '',
+          companyName: '',
+          divison: '',
+          role: '',
+          developer: 1,
+        },
+      ],
+    }));
+  };
+  const handleAddProject = () => {
+    setResumeData(prev => ({
+      ...prev,
+      project: [
+        ...prev.project,
+        {
+          startYear: '',
+          startMonth: '',
+          endYear: '',
+          endMonth: '',
+          projectName: '',
+          repositoryLink: '',
+        },
+      ],
+    }));
+  };
 
   const handleDeleteEducation = index => {
     const updatedEducation = resumeData.education.filter((_, i) => i !== index);
@@ -150,13 +190,55 @@ export default function ResumeDetail() {
       education: updatedEducation,
     }));
   };
+  const handleDeleteCareer = index => {
+    const updatedCareer = resumeData.career.filter((_, i) => i !== index);
+
+    setResumeData(prevData => ({
+      ...prevData,
+      career: updatedCareer,
+    }));
+  };
+  const handleDeleteProject = index => {
+    const updatedProject = resumeData.project.filter((_, i) => i !== index);
+
+    setResumeData(prevData => ({
+      ...prevData,
+      project: updatedProject,
+    }));
+  };
+  const handleDeleteFile = index => {
+    const updatedFile = resumeData.addfile.filter((_, i) => i !== index);
+
+    setResumeData(prevData => ({
+      ...prevData,
+      addfile: updatedFile,
+    }));
+  };
 
   //${BASE_URL}/resumes/${resumeId}
   // useEffect(() => {
-  //   fetch(`/data/data.json`)
+  //   fetch(`/data/data.json`,{
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json;charset=utf-8',
+  //   },
+  //   body: JSON.stringify({accessToken : token})
+  // })
   //     .then(res => res.json())
   //     .then(data => setResumeData(data));
   // }, []);
+
+  const handleResumePost = () => {
+    fetch(`${BASE_URL}/resumes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({ accessToken: token, resumeData: resumeData }),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
 
   return (
     <div className="resumeDetail">
@@ -310,7 +392,7 @@ export default function ResumeDetail() {
                     <div className="dateInputs">
                       <input
                         type="number"
-                        className="graduatedYear"
+                        className="year"
                         name="graduatedYear"
                         placeholder="YYYY"
                         value={education.graduatedYear}
@@ -318,7 +400,7 @@ export default function ResumeDetail() {
                       .
                       <input
                         type="number"
-                        className="graduatedMonth"
+                        className="month"
                         name="graduatedMonth"
                         placeholder="MM"
                         value={education.graduatedMonth}
@@ -352,17 +434,14 @@ export default function ResumeDetail() {
                     </div>
                   </div>
                   <button
-                    className="deleteEducationButton"
+                    className="deleteButton"
                     onClick={() => handleDeleteEducation(i)}
                   >
                     <TbTrash />
                   </button>
                 </div>
               ))}
-              <button
-                className="addEducationButton"
-                onClick={handleAddEducation}
-              >
+              <button className="addButton" onClick={handleAddEducation}>
                 <span className="plusMark">+</span>
                 학력 추가
               </button>
@@ -372,10 +451,186 @@ export default function ResumeDetail() {
               <h1 className="tableName">경력</h1>
               {resumeData.career.map((career, i) => (
                 <div className="careerItem" key={i}>
-                  <div className="careerItemLeft"></div>
-                  <div className="careerItemRight"></div>
+                  <div className="careerItemLeft">
+                    <div className="dateInputs">
+                      <input
+                        type="number"
+                        className="year"
+                        placeholder="YYYY"
+                        value={career.startYear}
+                      />
+                      .
+                      <input
+                        type="number"
+                        className="month"
+                        placeholder="MM"
+                        value={career.startMonth}
+                      />
+                      -
+                      <input
+                        type="number"
+                        className="year"
+                        placeholder="YYYY"
+                        value={career.endYear}
+                      />
+                      .
+                      <input
+                        type="number"
+                        className="month"
+                        placeholder="MM"
+                        value={career.endMonth}
+                      />
+                    </div>
+                  </div>
+                  <div className="careerItemRight">
+                    <div className="careerItemRightTop">
+                      <input
+                        type="text"
+                        className="companyName"
+                        placeholder="회사명을 입력해주세요"
+                        value={career.companyName}
+                      />
+                      <div className="buttonSection">
+                        <div>
+                          <input
+                            type="checkbox"
+                            className="notDeveloper"
+                            checked={!career.developer}
+                          />
+                          <span>비개발</span>
+                        </div>
+                        <button
+                          className="deleteButton"
+                          onClick={() => handleDeleteCareer(i)}
+                        >
+                          <TbTrash />
+                        </button>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      className="careerInput"
+                      placeholder="부서명"
+                      value={career.divison}
+                    />
+                    <input
+                      type="text"
+                      className="careerInput"
+                      placeholder="직책"
+                      value={career.role}
+                    />
+                  </div>
                 </div>
               ))}
+              <button className="addButton" onClick={handleAddCareer}>
+                <span className="plusMark">+</span>
+                경력 추가
+              </button>
+            </div>
+
+            <div className="project">
+              <h1 className="tableName">프로젝트</h1>
+              {resumeData.project.map((project, i) => (
+                <div className="projectItem" key={i}>
+                  <div className="projectItemLeft">
+                    <div className="dateInputs">
+                      <input
+                        type="number"
+                        className="year"
+                        placeholder="YYYY"
+                        value={project.startYear}
+                      />
+                      .
+                      <input
+                        type="number"
+                        className="month"
+                        placeholder="MM"
+                        value={project.startMonth}
+                      />
+                      -
+                      <input
+                        type="number"
+                        className="year"
+                        placeholder="YYYY"
+                        value={project.endYear}
+                      />
+                      .
+                      <input
+                        type="number"
+                        className="month"
+                        placeholder="MM"
+                        value={project.endMonth}
+                      />
+                    </div>
+                  </div>
+                  <div className="projectItemRight">
+                    <div className="projectItemRightTop">
+                      <input
+                        type="text"
+                        className="companyName"
+                        placeholder="프로젝트명을 입력해주세요"
+                        value={project.projectName}
+                      />
+                      <div className="buttonSection">
+                        <button
+                          className="deleteButton"
+                          onClick={() => handleDeleteProject(i)}
+                        >
+                          <TbTrash />
+                        </button>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      className="projectInput"
+                      placeholder="https://github.com"
+                      value={project.repositoryLink}
+                    />
+                  </div>
+                </div>
+              ))}
+              <button className="addButton" onClick={handleAddProject}>
+                <span className="plusMark">+</span>
+                프로젝트 추가
+              </button>
+            </div>
+          </div>
+
+          <div className="resumeCenterBottom">
+            <div className="files">
+              <h1 className="tableName">첨부파일</h1>
+              <p className="addFileMessage">
+                경험을 보여줄 수 있는 포트폴리오 / 경력기술서 등을 첨부해보세요.
+                (PDF를 권장합니다.)
+              </p>
+              {resumeData.addfile.map((file, i) => (
+                <ul className="fileItem" key={i}>
+                  {file.originFileName ? (
+                    <li className="fileBox">
+                      <a
+                        href={file.fileUrl}
+                        target="blank"
+                        rel="noopener noreferrer"
+                      >
+                        <TbFolderDown className="folderIcon" />
+                        {file.uploadedFileName}
+                      </a>
+                      <button
+                        className="deleteButton"
+                        onClick={() => handleDeleteFile(i)}
+                      >
+                        <TbTrash />
+                      </button>
+                    </li>
+                  ) : (
+                    <li className="fileIsNull">첨부파일이 비어있습니다.</li>
+                  )}
+                </ul>
+              ))}
+              <button className="addButton">
+                <span className="plusMark">+</span>
+                첨부파일 추가
+              </button>
             </div>
           </div>
         </div>
