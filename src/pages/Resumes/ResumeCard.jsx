@@ -12,12 +12,12 @@ export default function ResumeCard({ resume, onClick }) {
 
   useEffect(() => {
     fetch(`http://10.58.52.249:3000/resumes`, {
-      method: 'POST',
+      method: 'GET',
       // headers: {
       //   'Content-Type': 'application/json;charset=utf-8',
       // },
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
         Authorization: `${token}`,
       },
     }).then(res => res.json());

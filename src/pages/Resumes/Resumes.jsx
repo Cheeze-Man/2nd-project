@@ -24,7 +24,7 @@ export default function Resumes() {
     fetch(`http://10.58.52.249:3000/resumes`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
         Authorization: `${token}`,
       },
       // body: JSON.stringify({ accessToken: token }),
@@ -42,17 +42,18 @@ export default function Resumes() {
       <div className="resumeCardsContainer">
         <h1 className="resumeCardsContainerTitle">이력서 관리</h1>
         <div className="resumeCardPlace">
-          {resumes.map(resume => {
-            return (
-              <ResumeCard
-                key={resume.resumeId}
-                resume={resume}
-                onClick={() => {
-                  navigate(`/resume/${resume.resumeId}`);
-                }}
-              />
-            );
-          })}
+          {resumes &&
+            resumes.map(resume => {
+              return (
+                <ResumeCard
+                  key={resume.resumeId}
+                  resume={resume}
+                  onClick={() => {
+                    navigate(`/resume/${resume.resumeId}`);
+                  }}
+                />
+              );
+            })}
           <AddResume />
         </div>
       </div>
