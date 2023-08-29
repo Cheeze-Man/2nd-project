@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GrBriefcase, GrMailOption, GrCalendar, GrPhone } from 'react-icons/gr';
 import { SiGithub, SiNotion, SiBlogger } from 'react-icons/si';
-import { TbTrash } from 'react-icons/tb';
+import { TbTrash, TbFolderDown } from 'react-icons/tb';
 import './ResumeDetail.scss';
 import FileAttachmentContainer from './FileAttachmentContainer';
 
@@ -64,10 +64,11 @@ export default function ResumeDetail() {
 
   const [resumeData, setResumeData] = useState({
     userId: null,
-    title: '',
     email: '',
-    display: 0,
     birthday: '',
+    phoneNumber: '',
+    title: '',
+    display: 0,
     githubUrl: '',
     notionUrl: '',
     blogUrl: '',
@@ -103,9 +104,10 @@ export default function ResumeDetail() {
     ],
     resumeAddFile: [
       {
-        originFileName: '',
-        uploadedFileName: '',
+        fileId: '',
         fileUrl: '',
+        originFilename: '',
+        uploadedFileName: '',
       },
     ],
   });
@@ -292,6 +294,30 @@ export default function ResumeDetail() {
     });
   };
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = event => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      fetch(`http://127.0.0.1:3000/uploads`, {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('파일 업로드 성공:', data);
+        })
+        .catch(error => {
+          console.error('파일 업로드 실패:', error);
+        });
+    }
+  };
+
   // useEffect(() => {
   //   if (resumeId !== undefined) {
   //     fetch(`http://10.58.52.249:3000/resumes/${resumeId}`, {
@@ -351,7 +377,14 @@ export default function ResumeDetail() {
                 repositoryLink: '',
               },
             ],
-            resumeAddFile: data.data[0].resumeAddFile || [],
+            resumeAddFile: data.data[0].resumeAddFile || [
+              {
+                fileId: '',
+                fileUrl: '',
+                originFilename: '',
+                uploadedFileName: '',
+              },
+            ],
           };
           setResumeData(updatedResumeData);
         });
@@ -519,6 +552,9 @@ export default function ResumeDetail() {
                       type="number"
                       className="phoneNumberInput"
                       placeholder="00000000000"
+                      name="phoneNumber"
+                      value={resumeData.phoneNumber}
+                      onChange={handleInputChange}
                     />
                   </div>
                   <div className="displayToggle">
@@ -827,50 +863,42 @@ export default function ResumeDetail() {
             </div>
           </div>
 
-          {/* <div className="resumeCenterBottom">
-            <div className="files">
-              <h1 className="tableName">첨부파일</h1>
-              <p className="addFileMessage">
-                경험을 보여줄 수 있는 포트폴리오 / 경력기술서 등을 첨부해보세요.
-                (PDF를 권장합니다.)
-              </p>
-              {!resumeData.resumeAddFile && (
-                <ul className="fileItem">
-                  <li className="fileIsNull">첨부파일이 비어있습니다.</li>
-                </ul>
-              )}
-              {resumeData.resumeAddFile &&
+          <div className="fileAttachmentContainer">
+            <h1>첨부파일</h1>
+            <p className="fileAttachmentMessage">
+              경험을 보여줄 수 있는 포트폴리오 / 경력기술서 등을 첨부해보세요.
+              (PDF를 권장합니다.)
+            </p>
+            <ul className="files">
+              {resumeData.resumeAddFile[0].fileId !== '' ? (
                 resumeData.resumeAddFile.map((file, i) => (
-                  <ul className="fileItem" key={i}>
-                    {file.originFileName ? (
-                      <li className="fileBox">
-                        <a
-                          href={file.fileUrl}
-                          target="blank"
-                          rel="noopener noreferrer"
-                        >
-                          <TbFolderDown className="folderIcon" />
-                          {file.uploadedFileName}
-                        </a>
-                        <button
-                          className="deleteButton"
-                          onClick={() => handleDeleteFile(i)}
-                        >
-                          <TbTrash />
-                        </button>
-                      </li>
-                    ) : (
-                      <li className="fileIsNull">첨부파일이 비어있습니다.</li>
-                    )}
-                  </ul>
-                ))}
-              <button className="addButton">
-                <span className="plusMark">+</span>
-                첨부파일 추가
-              </button>
-            </div>
-          </div> */}
-          <FileAttachmentContainer />
+                  <li className="fileItem" key={i}>
+                    <a
+                      href={file.fileUrl}
+                      target="blank"
+                      rel="noopener noreferrer"
+                    >
+                      <TbFolderDown className="folderIcon" />
+                      {file.fileId}
+                    </a>
+                  </li>
+                ))
+              ) : (
+                <li className="fileItem" style={{ cursor: 'default' }}>
+                  첨부파일이 비어있습니다.
+                </li>
+              )}
+            </ul>
+            <label className="fileInputButton">
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="fileInput addButton"
+              />
+              <span className="plusMark">+</span>
+              첨부파일 추가
+            </label>
+          </div>
         </div>
         <div className="resumeBottomBar">
           <div className="barContent">
