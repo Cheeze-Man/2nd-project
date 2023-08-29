@@ -9,14 +9,14 @@ const BASE_URL = process.env.REACT_APP_API_KEY;
 
 const CATEGORIES = [
   { name: '기본정보', scrollY: 0, star: 'redStar' },
-  { name: '사진', scrollY: 1, star: '' },
-  { name: '간단소개', scrollY: 2, star: '' },
-  { name: '개발직무', scrollY: 3, star: '' },
-  { name: '기술스택', scrollY: 4, star: 'redStar' },
-  { name: '링크', scrollY: 5, star: '' },
-  { name: '학력', scrollY: 6, star: 'redStar' },
-  { name: '경력', scrollY: 7, star: 'greyStar' },
-  { name: '프로젝트', scrollY: 8, star: 'greyStar' },
+  { name: '사진', scrollY: 0, star: '' },
+  { name: '간단소개', scrollY: 0, star: '' },
+  { name: '개발직무', scrollY: 0, star: '' },
+  { name: '기술스택', scrollY: 0, star: 'redStar' },
+  { name: '링크', scrollY: 0.6, star: '' },
+  { name: '학력', scrollY: 1.05, star: 'redStar' },
+  { name: '경력', scrollY: 1.3, star: 'greyStar' },
+  { name: '프로젝트', scrollY: 1.75, star: 'greyStar' },
   { name: '교육이력', scrollY: 9, star: '' },
   { name: '기타사항', scrollY: 10, star: '' },
   { name: '자기소개서', scrollY: 11, star: '' },
@@ -84,7 +84,7 @@ export default function ResumeDetail() {
   const { resumeId } = useParams();
   const [resumeData, setResumeData] = useState({
     userId: null,
-    title: '새로운 이력서',
+    title: '',
     display: 0,
     githubUrl: LINKS[0].value,
     notionUrl: LINKS[1].value,
@@ -128,6 +128,13 @@ export default function ResumeDetail() {
     ],
   });
   const [isActive, setIsActive] = useState(resumeData.display);
+
+  const handleScroll = scrollY => {
+    window.scrollTo({
+      top: scrollY * window.innerHeight,
+      behavior: 'smooth',
+    });
+  };
 
   const handleDisplay = () => {
     setIsActive(!isActive);
@@ -274,9 +281,8 @@ export default function ResumeDetail() {
   };
   console.log(resumeData);
 
-  //${BASE_URL}/resumes/${resumeId}
   // useEffect(() => {
-  //   fetch(`/data/data.json`,{
+  //   fetch(`${BASE_URL}/resumes/${resumeId}`,{
   //   method: 'POST',
   //   headers: {
   //     'Content-Type': 'application/json;charset=utf-8',
@@ -314,8 +320,12 @@ export default function ResumeDetail() {
               </div>
             </div>
             <ul className="resumeCategories">
-              {CATEGORIES.map(category => (
-                <li className="categoryItem" key={category.scrollY}>
+              {CATEGORIES.map((category, i) => (
+                <li
+                  className="categoryItem"
+                  key={i}
+                  onClick={() => handleScroll(category.scrollY)}
+                >
                   {category.name}
                   {category.star !== '' && (
                     <span className={category.star}>*</span>
@@ -352,6 +362,7 @@ export default function ResumeDetail() {
           <div className="resumeTitle">
             <input
               className="titleInput"
+              placeholder="👉 새로운 이력서 이름을 입력해주세요 👈"
               type="text"
               maxLength={25}
               name="title"

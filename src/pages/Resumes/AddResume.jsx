@@ -5,7 +5,7 @@ import './AddResume.scss';
 
 export default function AddResume() {
   return (
-    <Link className="addResume" to="/resume">
+    <Link className="addResume" to="/resume/new">
       <div className="plusIconDiv">
         <FaPlus className="plusIcon" />
       </div>

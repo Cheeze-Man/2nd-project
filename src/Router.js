@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NotFound from './components/NotFound';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
 import Main from './pages/Main/Main';
@@ -29,10 +30,26 @@ const Router = () => {
           }
         />
         <Route
+          path="*"
+          element={
+            <Layout>
+              <NotFound />
+            </Layout>
+          }
+        />
+        <Route
           path="/resumes"
           element={
             <Layout>
               <Resumes />
+            </Layout>
+          }
+        />
+        <Route
+          path="/resumes/new"
+          element={
+            <Layout>
+              <ResumeDetail />
             </Layout>
           }
         />

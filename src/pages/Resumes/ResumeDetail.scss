@@ -93,6 +93,10 @@ input[type='number'] {
         display: flex;
         flex-direction: column;
         gap: 13px;
+
+        .categoryItem {
+          cursor: pointer;
+        }
       }
     }
 
@@ -152,6 +156,7 @@ input[type='number'] {
         font-size: 20px;
         height: 100%;
         border: none;
+        font-weight: 500;
 
         &:focus,
         &:hover {
@@ -677,6 +682,7 @@ input[type='number'] {
 
       .barMessage {
         font-size: 15px;
+        cursor: default;
         span {
           font-weight: 600;
         }
@@ -696,6 +702,7 @@ input[type='number'] {
           justify-content: center;
           margin-right: 12px;
           letter-spacing: -0.5px;
+          cursor: pointer;
         }
         .previewButton {
           padding: 0px 13px;
