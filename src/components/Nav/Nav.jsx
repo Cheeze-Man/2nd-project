@@ -3,6 +3,8 @@ import { FiSearch, FiChevronDown } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import './Nav.scss';
 
+const token = localStorage.getItem('token');
+
 const NAV_CATEGORIES = [
   {
     title: '직무 탐색',
@@ -48,14 +50,22 @@ export default function Nav() {
             ))}
           </div>
           <div className="userServise">
-            <div className="userInfo">
-              <Link to="#" className="userInfoLink">
-                {username}
-              </Link>
-              <span> 님 </span>
-              <FiChevronDown className="iconDown" />
-              <span>ㆍ</span>
-            </div>
+            {token ? (
+              <div className="userInfo">
+                <Link to="#" className="userInfoLink">
+                  {username}
+                </Link>
+                <span> 님 </span>
+                <FiChevronDown className="iconDown" />
+                <span>ㆍ</span>
+              </div>
+            ) : (
+              <div className="userInfo" style={{ cursor: 'default' }}>
+                ⬇️아래<span className="induction">검정 버튼</span>으로 점핏
+                시작하기!⬇️
+                <span>ㆍ</span>
+              </div>
+            )}
             <Link to="#" className="companyService">
               {' '}
               기업 서비스

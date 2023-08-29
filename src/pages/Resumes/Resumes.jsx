@@ -12,9 +12,16 @@ export default function Resumes() {
   const navigate = useNavigate();
 
   const [resumes, setResumes] = useState([]);
+  const [alertShown, setAlertShown] = useState(false);
 
   //${BASE_URL}/resumes
   useEffect(() => {
+    if (!token && !alertShown) {
+      setAlertShown(true);
+      alert('로그인 시에만 이용할 수 있는 서비스입니다.');
+      navigate(-1);
+    }
+
     fetch(
       `/data/data.json`,
       // , {
@@ -27,14 +34,14 @@ export default function Resumes() {
     )
       .then(res => res.json())
       .then(data => setResumes(data));
-  }, []);
+  }, [token, alertShown]);
 
   return (
     <div className="resumes">
       <div className="resumeCardsContainer">
         <h1 className="resumeCardsContainerTitle">이력서 관리</h1>
         <div className="resumeCardPlace">
-          {resumes.map((resume, _) => {
+          {resumes.map(resume => {
             return (
               <ResumeCard
                 key={resume.resumeId}
