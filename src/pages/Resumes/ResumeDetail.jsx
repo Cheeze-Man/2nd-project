@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GrBriefcase, GrMailOption, GrCalendar, GrPhone } from 'react-icons/gr';
 import { SiGithub, SiNotion, SiBlogger } from 'react-icons/si';
 import { TbTrash, TbFolderDown } from 'react-icons/tb';
 import './ResumeDetail.scss';
+import FileAttachmentContainer from './FileAttachmentContainer';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
 
@@ -64,7 +65,9 @@ export default function ResumeDetail() {
   const [resumeData, setResumeData] = useState({
     userId: null,
     title: '',
+    email: '',
     display: 0,
+    birthday: '',
     githubUrl: '',
     notionUrl: '',
     blogUrl: '',
@@ -131,6 +134,7 @@ export default function ResumeDetail() {
     },
   ];
   const [isActive, setIsActive] = useState(resumeData.display);
+  const titleInputRef = useRef(null);
 
   const handleScroll = scrollY => {
     window.scrollTo({
@@ -222,14 +226,14 @@ export default function ResumeDetail() {
       projects: updatedProject,
     }));
   };
-  const handleDeleteFile = index => {
-    const updatedFile = resumeData.addfile.filter((_, i) => i !== index);
+  // const handleDeleteFile = index => {
+  //   const updatedFile = resumeData.addfile.filter((_, i) => i !== index);
 
-    setResumeData(prevData => ({
-      ...prevData,
-      addfile: updatedFile,
-    }));
-  };
+  //   setResumeData(prevData => ({
+  //     ...prevData,
+  //     addfile: updatedFile,
+  //   }));
+  // };
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -286,6 +290,22 @@ export default function ResumeDetail() {
     });
   };
 
+  // useEffect(() => {
+  //   if (resumeId !== undefined) {
+  //     fetch(`http://10.58.52.249:3000/resumes/${resumeId}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `${token}`,
+  //       },
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         setResumeData(data.data[0]);
+  //         console.log(resumeData);
+  //       });
+  //   }
+  // }, []);
   useEffect(() => {
     if (resumeId !== undefined) {
       fetch(`http://10.58.52.249:3000/resumes/${resumeId}`, {
@@ -296,25 +316,85 @@ export default function ResumeDetail() {
         },
       })
         .then(res => res.json())
-        .then(data => console.log(data.data[0]));
+        .then(data => {
+          const updatedResumeData = {
+            ...data.data[0],
+            educations: data.data[0].educations || [
+              {
+                graduatedYear: '',
+                graduatedMonth: '',
+                schoolType: '',
+                schoolName: '',
+              },
+            ],
+            careers: data.data[0].careers || [
+              {
+                startYear: '',
+                startMonth: '',
+                endYear: '',
+                endMonth: '',
+                companyName: '',
+                divison: '',
+                role: '',
+                developer: 1,
+              },
+            ],
+            projects: data.data[0].projects || [
+              {
+                startYear: '',
+                startMonth: '',
+                endYear: '',
+                endMonth: '',
+                projectName: '',
+                repositoryLink: '',
+              },
+            ],
+            addfile: data.data[0].addfile || [],
+          };
+          setResumeData(updatedResumeData);
+        });
     }
   }, []);
 
+  // const handleResumePost = () => {
+  //   fetch(`http://10.58.52.249:3000/resumes`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       Authorization: `${token}`,
+  //     },
+  //     body: JSON.stringify(resumeData),
+  //   })
+  //     .then(res => res.json())
+  //     .then(() => {
+  //       navigate('/resumes');
+  //     });
+  // };
   const handleResumePost = () => {
-    fetch(`http://10.58.52.249:3000/resumes`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify(resumeData),
-    })
-      .then(res => res.json())
-      .then(() => {
-        navigate('/resumes');
+    if (resumeData.title === '') {
+      alert('이력서 제목은 필수 항목입니다.');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
       });
-  };
 
+      titleInputRef.current.focus();
+    } else {
+      fetch(`http://10.58.52.249:3000/resumes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(resumeData),
+      })
+        .then(res => res.json())
+        .then(() => {
+          navigate('/resumes');
+        });
+    }
+  };
+  console.log(resumeData);
   return (
     <div className="resumeDetail">
       <div className="resumeDetailContainer">
@@ -373,6 +453,7 @@ export default function ResumeDetail() {
         <div className="resumeCenter">
           <div className="resumeTitle">
             <input
+              ref={titleInputRef}
               className="titleInput"
               placeholder="👉 새로운 이력서 이름을 입력해주세요 👈"
               type="text"
@@ -380,6 +461,9 @@ export default function ResumeDetail() {
               name="title"
               value={resumeData.title}
               onChange={handleInputChange}
+              style={
+                resumeData.title === '' ? { outline: '1px solid red' } : {}
+              }
             />
           </div>
 
@@ -395,7 +479,9 @@ export default function ResumeDetail() {
                 <div className="basicInfoTop">
                   <div className="userEmail">
                     <GrMailOption />
-                    <p>{userEmail}</p>
+                    <p>
+                      {resumeData.email === '' ? userEmail : resumeData.email}
+                    </p>
                   </div>
                   <div className="careersYear">
                     <GrBriefcase />
@@ -418,6 +504,9 @@ export default function ResumeDetail() {
                       type="number"
                       className="birthYearInput"
                       placeholder="YYYY"
+                      name="birthday"
+                      value={resumeData.birthday}
+                      onChange={handleInputChange}
                     />
                     <p>년생</p>
                   </div>
@@ -736,7 +825,7 @@ export default function ResumeDetail() {
             </div>
           </div>
 
-          <div className="resumeCenterBottom">
+          {/* <div className="resumeCenterBottom">
             <div className="files">
               <h1 className="tableName">첨부파일</h1>
               <p className="addFileMessage">
@@ -778,7 +867,8 @@ export default function ResumeDetail() {
                 첨부파일 추가
               </button>
             </div>
-          </div>
+          </div> */}
+          <FileAttachmentContainer />
         </div>
         <div className="resumeBottomBar">
           <div className="barContent">

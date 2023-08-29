@@ -63,7 +63,6 @@ export default function Resumes() {
           alt="이력서 광고 배너"
         />
       </div>
-      <FileAttachmentContainer />
     </div>
   );
 }

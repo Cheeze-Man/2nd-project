@@ -5,7 +5,7 @@
   margin: 20px auto 20px;
   padding: 32px 40px 40px;
   border-radius: 12px;
-  width: 1060px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -36,29 +36,30 @@
     font-size: 15px;
   }
 
-  .plusIconDiv {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    color: White;
-    background-color: $green;
+  .addButton {
+    margin: 20px 0;
+    padding-left: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-
-    .plusIcon {
-      font-size: 12px;
-    }
-  }
-
-  .fileInputButton {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    color: #444444;
-    font-weight: 500;
+    text-align: center;
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    width: 13%;
+    .plusMark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-bottom: 5px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: $green;
+      color: #ffffff;
+      font-size: 28px;
+      margin-right: 5px;
+    }
   }
 
   .fileInput {

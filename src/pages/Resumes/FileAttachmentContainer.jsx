@@ -8,6 +8,23 @@ export default function FileAttachmentContainer() {
   const handleFileChange = event => {
     const file = event.target.files[0];
     setSelectedFile(file);
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      fetch(`http://127.0.0.1:3000/uploads`, {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('파일 업로드 성공:', data);
+        })
+        .catch(error => {
+          console.error('파일 업로드 실패:', error);
+        });
+    }
   };
 
   return (
@@ -26,10 +43,10 @@ export default function FileAttachmentContainer() {
       </ul>
       <label className="fileInputButton">
         <input type="file" onChange={handleFileChange} className="fileInput" />
-        <div className="plusIconDiv">
-          <FaPlus className="plusIcon" />
-        </div>
-        <span className="fileInputText">첨부파일 추가</span>
+        <button className="addButton">
+          <span className="plusMark">+</span>
+          첨부파일 추가
+        </button>
       </label>
     </div>
   );
