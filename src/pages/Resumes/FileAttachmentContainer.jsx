@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
 import './FileAttachmentContainer.scss';
 
 export default function FileAttachmentContainer() {

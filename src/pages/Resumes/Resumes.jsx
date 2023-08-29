@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FileAttachmentContainer from './FileAttachmentContainer';
 import ResumeCard from './ResumeCard';
 import AddResume from './AddResume';
 import './Resumes.scss';
