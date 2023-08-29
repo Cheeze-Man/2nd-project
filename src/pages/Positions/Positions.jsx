@@ -1,81 +1,84 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Nav from '../../components/Nav.jsx';
 import Card from '../../components/Card.jsx';
 import PositionBtn from '../Positions/PositionBtn.jsx';
-import PositionTechBtn from '../Positions/PositionTechBtn.jsx';
 import './Positions.scss';
 
 export default function Positions() {
-  const [openTech, setOpenTech] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [companyList, setCompanyList] = useState([]);
+  const [jobCategoryList, setJobCategoryList] = useState([]);
 
-  function handleTechClick() {
-    setOpenTech(!openTech);
-  }
-
-  const [jobData, setJobData] = useState({
-    jobGroup: '',
-    jobIndex: '',
-    jobType: '',
-  });
-
-  const { jobGroup, jobIndex, jobType } = jobData;
-
-  useEffect(() => {
-    fetch('', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: jobGroup,
-        title: jobIndex,
-        job_type_id: jobType,
-      }),
-    })
-      .then(response => response.json())
-      .then(job => {
-        setJobData(job);
-      });
-  }, []);
-
-  const [techData, setTechData] = useState({
-    techImg: '',
-    techList: '',
-  });
-
-  const { techImg, techList } = techData;
-
-  const techBtnClick = () => {
-    fetch('', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: techImg,
-        title: techList,
-      }),
-    })
-      .then(response => response.json())
-      .then(tech => {
-        setTechData(tech);
-      });
+  const handleClick = () => {
+    searchParams.delete('category');
+    setSearchParams(searchParams);
   };
 
-  const [cardData, setCardData] = useState({
-    urlLink: '',
-    imgSrc: '',
-    name: '',
-    title: '',
-    location: '',
-    career: '',
-  });
+  const jobBtnClick = categoryId => {
+    // 1. 이미 선택된 버튼이라면, searchParams에서 해당 부분 찾아서 제거
+    const hasSelected = searchParams
+      .getAll('category')
+      .includes(String(categoryId));
 
-  const { urlLink, imgSrc, name, title, location, career } = cardData;
+    if (hasSelected) {
+      const newSearchParams = searchParams
+        .getAll('category')
+        .filter(id => id !== String(categoryId));
 
+      searchParams.delete('category');
+
+      newSearchParams.forEach(param => {
+        searchParams.append('category', param);
+      });
+
+      setSearchParams(searchParams);
+
+      return;
+    }
+
+    if (searchParams.getAll('category').length >= 5) {
+      alert('최대 5개까지 선택하실 수 있습니다.');
+
+      return;
+    }
+
+    // 2. 선택되지 않은 버튼이라면, searchParams에 추가
+    searchParams.append('category', categoryId);
+    setSearchParams(searchParams);
+  };
+
+  console.log(searchParams.getAll('category'));
+
+  //   2. 직무 버튼 선택/선택취소 시,
+  //   2-1. 해당 직무 회사 리스트 GET
   useEffect(() => {
-    fetch('')
+    // 1. 데이터는 여기서만 받아오면 됨!
+    // 2. 그 데이터를 받아오기 위한 조건은, 직무 버튼을 눌러서 searchParams가 변경되었을 때
+    // 3. 그래서 의존성 배열에 searchParams 넣어 둠
+    // 4. searchParams를 토대로, 동적인 GET 요청이 가능함 -> API 확인 필요
+    // fetch(`회사 리스트 GET API/positions?${searchParams}`)
+    fetch(`API/positions?${searchParams}`)
+      .then(response => response.json())
+      .then(job => {
+        setCompanyList(job);
+      });
+  }, [searchParams]);
+
+  // 1. 직무 버튼 리스트 GET
+  useEffect(() => {
+    fetch('/data/jobCategoryData.json')
       .then(response => response.json())
       .then(data => {
-        setCardData(data);
+        setJobCategoryList(data);
       });
   }, []);
+
+  const isAll = searchParams.getAll('category').length === 0;
+
+  //   2-2. (추가구현) 해당 직무 스택 리스트 GET
+  //   3. (추가구현) 스택 버튼 선택/선택취소 시,
+  //   3-1. (추가구현) 회사 리스트 GET
 
   return (
     <div className="positions">
@@ -83,31 +86,48 @@ export default function Positions() {
         <Nav />
         <div className="positionSearch">직무 탐색</div>
         <div className="positionList">
-          {/* 추후 advanced router세션 이후 기능 구현할 것 */}
-          <PositionBtn
-            handleTechClick={handleTechClick}
-            title={jobGroup}
-            onClick={techBtnClick}
-          />
+          <button
+            className={`positionBtn ${isAll ? 'clicked' : ''}`}
+            onClick={handleClick}
+          >
+            전체
+          </button>
+          {jobCategoryList.map(jobCategory => (
+            <PositionBtn
+              key={jobCategory.id}
+              title={jobCategory.category}
+              isSelected={searchParams
+                .getAll('category')
+                .includes(String(jobCategory.id))}
+              onClick={() => jobBtnClick(jobCategory.id)}
+            />
+          ))}
         </div>
-        {openTech && (
-          <div>
-            <PositionTechBtn techImg={techImg} techList={techList} />
-          </div>
-        )}
       </div>
       <div className="cardListDiv">
         <div></div>
         <div className="cardListStyle">
           <div className="cardList">
-            <Card
-              urlLink={urlLink}
-              companyImage={imgSrc}
-              companyName={name}
-              title={title}
-              workArea={location}
-              career={career}
-            />
+            {companyList.map(
+              ({
+                jobpostingId,
+                companyImage,
+                companyName,
+                jobPostingTitle,
+                workArea,
+                career,
+              }) => (
+                <Card
+                  key={jobpostingId}
+                  urlLink={jobpostingId}
+                  companyImage={companyImage}
+                  companyName={companyName}
+                  title={jobPostingTitle}
+                  workArea={workArea}
+                  career={career}
+                />
+              ),
+            )}
           </div>
         </div>
       </div>
