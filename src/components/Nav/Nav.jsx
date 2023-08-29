@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Nav.scss';
 
 const token = localStorage.getItem('token');
+const username = localStorage.getItem('username');
 
 const NAV_CATEGORIES = [
   {
@@ -18,8 +19,6 @@ const NAV_CATEGORIES = [
 
 export default function Nav() {
   const navigate = useNavigate();
-
-  const username = localStorage.getItem('username');
 
   return (
     <header id="header">
@@ -66,7 +65,15 @@ export default function Nav() {
                 <span>ㆍ</span>
               </div>
             )}
-            <Link to="#" className="companyService">
+            <Link
+              to="#"
+              className="companyService"
+              onClick={() => {
+                localStorage.setItem('token', 'asdjhasjkdh1234');
+                localStorage.setItem('username', '박동철');
+                localStorage.setItem('email', 'email@test.com');
+              }}
+            >
               {' '}
               기업 서비스
             </Link>

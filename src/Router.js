@@ -3,17 +3,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
+import MyJumpit from './pages/MyJumpit/MyJumpit';
 import Main from './pages/Main/Main';
 import Resumes from './pages/Resumes/Resumes';
 import ResumeDetail from './pages/Resumes/ResumeDetail';
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <>
       <Nav />
       {children}
-      <Footer />
-    </div>
+    </>
   );
 };
 
@@ -26,6 +26,7 @@ const Router = () => {
           element={
             <Layout>
               <Main />
+              <Footer />
             </Layout>
           }
         />
@@ -34,6 +35,16 @@ const Router = () => {
           element={
             <Layout>
               <NotFound />
+              <Footer />
+            </Layout>
+          }
+        />
+        <Route
+          path="/myjumpit"
+          element={
+            <Layout>
+              <MyJumpit />
+              <Footer />
             </Layout>
           }
         />
@@ -42,11 +53,12 @@ const Router = () => {
           element={
             <Layout>
               <Resumes />
+              <Footer />
             </Layout>
           }
         />
         <Route
-          path="/resumes/new"
+          path="/resume/new"
           element={
             <Layout>
               <ResumeDetail />

@@ -11,7 +11,7 @@ export default function LoginModal({
   emailIsValid,
 }) {
   const handleClick = () => {
-    fetch(`${BASE_URL}/users/presignin`, {
+    fetch(`http://10.58.52.249:3000/users/presignin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

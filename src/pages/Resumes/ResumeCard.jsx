@@ -4,21 +4,23 @@ import { BsDot } from 'react-icons/bs';
 import './ResumeCard.scss';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
+const token = localStorage.getItem('token');
 
 export default function ResumeCard({ resume, onClick }) {
   const [resumeInfo, setResumeInfo] = useState(resume);
   const [isActive, setIsActive] = useState(resumeInfo.display);
 
   useEffect(() => {
-    fetch(`data/data.json`).then(res => res.json());
-    // `${BASE_URL}/resumes`,
-    // , {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify({ accessToken: token }),
-    // }
+    fetch(`http://10.58.52.249:3000/resumes`, {
+      method: 'POST',
+      // headers: {
+      //   'Content-Type': 'application/json;charset=utf-8',
+      // },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${token}`,
+      },
+    }).then(res => res.json());
   }, [resumeInfo]);
 
   const handleDisplay = () => {

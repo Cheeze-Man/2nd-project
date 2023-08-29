@@ -52,44 +52,21 @@ const FIELDS = [
   '웹퍼블리셔',
 ];
 
-const LINKS = [
-  {
-    icon: <SiGithub className="linkIcon" />,
-    title: 'Github',
-    placeholder: 'https://github.com',
-    name: 'githubUrl',
-    value: '',
-  },
-  {
-    icon: <SiNotion className="linkIcon" />,
-    title: 'Notion',
-    placeholder: 'https://notion.so',
-    name: 'notionUrl',
-    value: '',
-  },
-  {
-    icon: <SiBlogger className="linkIcon" />,
-    title: 'Blog',
-    placeholder: 'https://blog.jumpit.co.kr',
-    name: 'blogUrl',
-    value: '',
-  },
-];
-
 const userName = localStorage.getItem('username');
 const userEmail = localStorage.getItem('email');
 const token = localStorage.getItem('token');
 
 export default function ResumeDetail() {
   const { resumeId } = useParams();
+
   const [resumeData, setResumeData] = useState({
     userId: null,
     title: '',
     display: 0,
-    githubUrl: LINKS[0].value,
-    notionUrl: LINKS[1].value,
-    blogUrl: LINKS[2].value,
-    education: [
+    githubUrl: '',
+    notionUrl: '',
+    blogUrl: '',
+    educations: [
       {
         graduatedYear: '',
         graduatedMonth: '',
@@ -97,7 +74,7 @@ export default function ResumeDetail() {
         schoolName: '',
       },
     ],
-    career: [
+    careers: [
       {
         startYear: '',
         startMonth: '',
@@ -109,7 +86,7 @@ export default function ResumeDetail() {
         developer: 1,
       },
     ],
-    project: [
+    projects: [
       {
         startYear: '',
         startMonth: '',
@@ -127,6 +104,30 @@ export default function ResumeDetail() {
       },
     ],
   });
+
+  const LINKS = [
+    {
+      icon: <SiGithub className="linkIcon" />,
+      title: 'Github',
+      placeholder: 'https://github.com',
+      name: 'githubUrl',
+      value: resumeData.githubUrl,
+    },
+    {
+      icon: <SiNotion className="linkIcon" />,
+      title: 'Notion',
+      placeholder: 'https://notion.so',
+      name: 'notionUrl',
+      value: resumeData.notionUrl,
+    },
+    {
+      icon: <SiBlogger className="linkIcon" />,
+      title: 'Blog',
+      placeholder: 'https://blog.jumpit.co.kr',
+      name: 'blogUrl',
+      value: resumeData.blogUrl,
+    },
+  ];
   const [isActive, setIsActive] = useState(resumeData.display);
 
   const handleScroll = scrollY => {
@@ -147,8 +148,8 @@ export default function ResumeDetail() {
   const handleAddEducation = () => {
     setResumeData(prev => ({
       ...prev,
-      education: [
-        ...prev.education,
+      educations: [
+        ...prev.educations,
         {
           graduatedYear: '',
           graduatedMonth: '',
@@ -161,8 +162,8 @@ export default function ResumeDetail() {
   const handleAddCareer = () => {
     setResumeData(prev => ({
       ...prev,
-      career: [
-        ...prev.career,
+      careers: [
+        ...prev.careers,
         {
           startYear: '',
           startMonth: '',
@@ -179,8 +180,8 @@ export default function ResumeDetail() {
   const handleAddProject = () => {
     setResumeData(prev => ({
       ...prev,
-      project: [
-        ...prev.project,
+      projects: [
+        ...prev.projects,
         {
           startYear: '',
           startMonth: '',
@@ -194,27 +195,29 @@ export default function ResumeDetail() {
   };
 
   const handleDeleteEducation = index => {
-    const updatedEducation = resumeData.education.filter((_, i) => i !== index);
+    const updatedEducation = resumeData.educations.filter(
+      (_, i) => i !== index,
+    );
 
     setResumeData(prevData => ({
       ...prevData,
-      education: updatedEducation,
+      educations: updatedEducation,
     }));
   };
   const handleDeleteCareer = index => {
-    const updatedCareer = resumeData.career.filter((_, i) => i !== index);
+    const updatedCareer = resumeData.careers.filter((_, i) => i !== index);
 
     setResumeData(prevData => ({
       ...prevData,
-      career: updatedCareer,
+      careers: updatedCareer,
     }));
   };
   const handleDeleteProject = index => {
-    const updatedProject = resumeData.project.filter((_, i) => i !== index);
+    const updatedProject = resumeData.projects.filter((_, i) => i !== index);
 
     setResumeData(prevData => ({
       ...prevData,
-      project: updatedProject,
+      projects: updatedProject,
     }));
   };
   const handleDeleteFile = index => {
@@ -233,17 +236,18 @@ export default function ResumeDetail() {
       [name]: value,
     }));
   };
+  console.log(resumeData);
 
   const handleEducation = (e, i) => {
     const { name, value } = e.target;
 
     setResumeData(prev => {
-      const updatedEducation = [...prev.education];
+      const updatedEducation = [...prev.educations];
       updatedEducation[i] = { ...updatedEducation[i], [name]: value };
 
       return {
         ...prev,
-        education: updatedEducation,
+        educations: updatedEducation,
       };
     });
   };
@@ -252,7 +256,7 @@ export default function ResumeDetail() {
     const { name, value, type, checked } = e.target;
 
     setResumeData(prev => {
-      const updatedCareer = [...prev.career];
+      const updatedCareer = [...prev.careers];
       if (type === 'checkbox') {
         updatedCareer[i] = { ...updatedCareer[i], [name]: checked ? 0 : 1 };
       } else {
@@ -261,7 +265,7 @@ export default function ResumeDetail() {
 
       return {
         ...prev,
-        career: updatedCareer,
+        careers: updatedCareer,
       };
     });
   };
@@ -270,34 +274,44 @@ export default function ResumeDetail() {
     const { name, value } = e.target;
 
     setResumeData(prev => {
-      const updatedProject = [...prev.project];
+      const updatedProject = [...prev.projects];
       updatedProject[i] = { ...updatedProject[i], [name]: value };
 
       return {
         ...prev,
-        project: updatedProject,
+        projects: updatedProject,
       };
     });
   };
-  console.log(resumeData);
 
-  // useEffect(() => {
-  //   fetch(`${BASE_URL}/resumes/${resumeId}`,{
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json;charset=utf-8',
-  //   },
-  //   body: JSON.stringify({accessToken : token})
-  // })
-  //     .then(res => res.json())
-  //     .then(data => setResumeData(data));
-  // }, []);
+  useEffect(() => {
+    if (resumeId !== undefined) {
+      fetch(`http://10.58.52.249:3000/resumes/${resumeId}`, {
+        method: 'POST',
+        // headers: {
+        //   'Content-Type': 'application/json;charset=utf-8',
+        // },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      })
+        .then(res => res.json())
+        .then(data => setResumeData(data))
+        .then(console.log(resumeData));
+    }
+  }, []);
 
   const handleResumePost = () => {
-    fetch(`${BASE_URL}/resumes`, {
+    fetch(`http://10.58.52.249:3000/resumes`, {
       method: 'POST',
-      headers: JSON.stringify({ accessToken: token }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${token}`,
+      },
       body: JSON.stringify(resumeData),
+      // headers: JSON.stringify({ accessToken: token }),
+      // body: JSON.stringify(resumeData),
     })
       .then(res => res.json())
       .then(data => console.log(data));
@@ -385,15 +399,15 @@ export default function ResumeDetail() {
                     <GrMailOption />
                     <p>{userEmail}</p>
                   </div>
-                  <div className="careerYear">
+                  <div className="careersYear">
                     <GrBriefcase />
                     <select
-                      name="careerYearSelect"
-                      className="careerYearSelect"
+                      name="careersYearSelect"
+                      className="careersYearSelect"
                     >
-                      {CAREER.map(career => (
-                        <option value={career.value} key={career.value}>
-                          {career.text}
+                      {CAREER.map(careers => (
+                        <option value={careers.value} key={careers.value}>
+                          {careers.text}
                         </option>
                       ))}
                     </select>
@@ -471,10 +485,10 @@ export default function ResumeDetail() {
               ))}
             </div>
 
-            <div className="education">
+            <div className="educations">
               <h1 className="tableName">학력</h1>
-              {resumeData.education.map((education, i) => (
-                <div className="educationItem" key={i}>
+              {resumeData.educations.map((educations, i) => (
+                <div className="educationsItem" key={i}>
                   <div className="WhenGraduated">
                     <div className="dateInputs">
                       <input
@@ -482,7 +496,7 @@ export default function ResumeDetail() {
                         className="year"
                         name="graduatedYear"
                         placeholder="YYYY"
-                        value={education.graduatedYear}
+                        value={educations.graduatedYear}
                         onChange={e => handleEducation(e, i)}
                       />
                       .
@@ -491,7 +505,7 @@ export default function ResumeDetail() {
                         className="month"
                         name="graduatedMonth"
                         placeholder="MM"
-                        value={education.graduatedMonth}
+                        value={educations.graduatedMonth}
                         onChange={e => handleEducation(e, i)}
                       />
                     </div>
@@ -502,7 +516,7 @@ export default function ResumeDetail() {
                       <select
                         name="schoolType"
                         className="schoolType"
-                        value={education.schoolType}
+                        value={educations.schoolType}
                         onChange={e => handleEducation(e, i)}
                       >
                         <option
@@ -524,7 +538,7 @@ export default function ResumeDetail() {
                         className="schoolName"
                         name="schoolName"
                         placeholder="학교명을 입력해주세요."
-                        value={education.schoolName}
+                        value={educations.schoolName}
                         onChange={e => handleEducation(e, i)}
                       />
                     </div>
@@ -543,17 +557,17 @@ export default function ResumeDetail() {
               </button>
             </div>
 
-            <div className="career">
+            <div className="careers">
               <h1 className="tableName">경력</h1>
-              {resumeData.career.map((career, i) => (
-                <div className="careerItem" key={i}>
-                  <div className="careerItemLeft">
+              {resumeData.careers.map((careers, i) => (
+                <div className="careersItem" key={i}>
+                  <div className="careersItemLeft">
                     <div className="dateInputs">
                       <input
                         type="number"
                         className="year"
                         placeholder="YYYY"
-                        value={career.startYear}
+                        value={careers.startYear}
                         name="startYear"
                         onChange={e => handleCareer(e, i)}
                       />
@@ -562,7 +576,7 @@ export default function ResumeDetail() {
                         type="number"
                         className="month"
                         placeholder="MM"
-                        value={career.startMonth}
+                        value={careers.startMonth}
                         name="startMonth"
                         onChange={e => handleCareer(e, i)}
                       />
@@ -571,7 +585,7 @@ export default function ResumeDetail() {
                         type="number"
                         className="year"
                         placeholder="YYYY"
-                        value={career.endYear}
+                        value={careers.endYear}
                         name="endYear"
                         onChange={e => handleCareer(e, i)}
                       />
@@ -580,19 +594,19 @@ export default function ResumeDetail() {
                         type="number"
                         className="month"
                         placeholder="MM"
-                        value={career.endMonth}
+                        value={careers.endMonth}
                         name="endMonth"
                         onChange={e => handleCareer(e, i)}
                       />
                     </div>
                   </div>
-                  <div className="careerItemRight">
-                    <div className="careerItemRightTop">
+                  <div className="careersItemRight">
+                    <div className="careersItemRightTop">
                       <input
                         type="text"
                         className="companyName"
                         placeholder="회사명을 입력해주세요"
-                        value={career.companyName}
+                        value={careers.companyName}
                         name="companyName"
                         onChange={e => handleCareer(e, i)}
                       />
@@ -601,7 +615,7 @@ export default function ResumeDetail() {
                           <input
                             type="checkbox"
                             className="notDeveloper"
-                            checked={!career.developer}
+                            checked={!careers.developer}
                             name="developer"
                             onChange={e => handleCareer(e, i)}
                           />
@@ -617,17 +631,17 @@ export default function ResumeDetail() {
                     </div>
                     <input
                       type="text"
-                      className="careerInput"
+                      className="careersInput"
                       placeholder="부서명"
-                      value={career.divison}
+                      value={careers.divison}
                       name="divison"
                       onChange={e => handleCareer(e, i)}
                     />
                     <input
                       type="text"
-                      className="careerInput"
+                      className="careersInput"
                       placeholder="직책"
-                      value={career.role}
+                      value={careers.role}
                       name="role"
                       onChange={e => handleCareer(e, i)}
                     />
@@ -640,9 +654,9 @@ export default function ResumeDetail() {
               </button>
             </div>
 
-            <div className="project">
+            <div className="projects">
               <h1 className="tableName">프로젝트</h1>
-              {resumeData.project.map((project, i) => (
+              {resumeData.projects.map((projects, i) => (
                 <div className="projectItem" key={i}>
                   <div className="projectItemLeft">
                     <div className="dateInputs">
@@ -651,7 +665,7 @@ export default function ResumeDetail() {
                         className="year"
                         placeholder="YYYY"
                         name="startYear"
-                        value={project.startYear}
+                        value={projects.startYear}
                         onChange={e => handleProject(e, i)}
                       />
                       .
@@ -660,7 +674,7 @@ export default function ResumeDetail() {
                         className="month"
                         placeholder="MM"
                         name="startMonth"
-                        value={project.startMonth}
+                        value={projects.startMonth}
                         onChange={e => handleProject(e, i)}
                       />
                       -
@@ -669,7 +683,7 @@ export default function ResumeDetail() {
                         className="year"
                         placeholder="YYYY"
                         name="endYear"
-                        value={project.endYear}
+                        value={projects.endYear}
                         onChange={e => handleProject(e, i)}
                       />
                       .
@@ -678,7 +692,7 @@ export default function ResumeDetail() {
                         className="month"
                         placeholder="MM"
                         name="endMonth"
-                        value={project.endMonth}
+                        value={projects.endMonth}
                         onChange={e => handleProject(e, i)}
                       />
                     </div>
@@ -690,7 +704,7 @@ export default function ResumeDetail() {
                         className="companyName"
                         placeholder="프로젝트명을 입력해주세요"
                         name="projectName"
-                        value={project.projectName}
+                        value={projects.projectName}
                         onChange={e => handleProject(e, i)}
                       />
                       <div className="buttonSection">
@@ -708,7 +722,7 @@ export default function ResumeDetail() {
                       className="projectInput"
                       placeholder="https://github.com"
                       name="repositoryLink"
-                      value={project.repositoryLink}
+                      value={projects.repositoryLink}
                       onChange={e => handleProject(e, i)}
                     />
                   </div>

@@ -30,7 +30,7 @@ export default function ModalJoin({ handleModal, email }) {
   const { agreement1, agreement2, agreement3 } = agreements;
 
   const handleOnSubmit = () => {
-    fetch(`${BASE_URL}/users/signup`, {
+    fetch(`http://10.58.52.249:3000/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -1,11 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginContainer.scss';
 
 export default function LoginContainer({ handleModal }) {
   const token = localStorage.getItem('token');
-
   const email = localStorage.getItem('email');
   const username = localStorage.getItem('username');
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -24,11 +26,11 @@ export default function LoginContainer({ handleModal }) {
       </div>
       <p className="loginContainerUserEmail">{email}</p>
       <div className="loginMenus">
-        <div className="loginMenu">
+        <div className="loginMenu" onClick={() => navigate('/resume/new')}>
           <p>📝</p>
           <p>이력서 작성</p>
         </div>
-        <div className="loginMenu">
+        <div className="loginMenu" onClick={() => navigate('/myjumpit')}>
           <p>😎</p>
           <p>마이점핏</p>
         </div>

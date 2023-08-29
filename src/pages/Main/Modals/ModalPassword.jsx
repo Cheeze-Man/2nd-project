@@ -20,7 +20,7 @@ export default function ModalPassword({ email, handleModal }) {
   };
 
   const handlePostUserInfo = () => {
-    fetch(`${BASE_URL}/users/signin`, {
+    fetch(`http://10.58.52.249:3000/users/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -32,7 +32,8 @@ export default function ModalPassword({ email, handleModal }) {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.accessToken) {
+        if (data) {
+          console.log(data);
           localStorage.setItem('token', data.accessToken);
           localStorage.setItem('email', data.email);
           localStorage.setItem('username', data.username);

@@ -14,7 +14,6 @@ export default function Resumes() {
   const [resumes, setResumes] = useState([]);
   const [alertShown, setAlertShown] = useState(false);
 
-  //${BASE_URL}/resumes
   useEffect(() => {
     if (!token && !alertShown) {
       setAlertShown(true);
@@ -22,18 +21,20 @@ export default function Resumes() {
       navigate(-1);
     }
 
-    fetch(
-      `/data/data.json`,
-      // , {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json;charset=utf-8',
-      //   },
-      //   body: JSON.stringify({ accessToken: token }),
-      // }
-    )
+    fetch(`http://10.58.52.249:3000/resumes`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${token}`,
+      },
+      // body: JSON.stringify({ accessToken: token }),
+      // headers: {
+      //   'Content-Type': 'application/json;charset=utf-8',
+      // },
+      // body: JSON.stringify({ accessToken: token }),
+    })
       .then(res => res.json())
-      .then(data => setResumes(data));
+      .then(data => setResumes(data.data));
   }, [token, alertShown]);
 
   return (
