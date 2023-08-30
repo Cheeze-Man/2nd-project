@@ -1,55 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Nav from '../../components/Nav.jsx';
 import './PositionsDetail.scss';
 
-export default function PositionsDetail(props) {
-  const [companyInfo, setCompanyInfo] = useState([]);
+export default function PositionsDetail() {
+  const [companyInfo, setCompanyInfo] = useState({});
   const params = useParams();
   const id = params.id;
 
   useEffect(() => {
-    fetch(`API/${id}`)
+    fetch(`http://10.58.52.68:3000/positions/${id}`)
       .then(response => response.json())
       .then(data => {
-        setCompanyInfo(data);
+        setCompanyInfo(data.data[0]);
       });
-  }, []);
+  }, [params]);
+
+  console.log(companyInfo);
 
   return (
     <div className="positionsDetail">
-      <Nav />
       <div className="positionsContainer">
         <div className="positionDetailBox">
           <div className="titleBox">
             <h1 className="titleStyle">{companyInfo.title}</h1>
+            <p>{companyInfo.companyName}</p>
           </div>
           <div className="companyInfoBox">
             <div className="companyInfo">
-              <h2 className="companyInfoTitle">{companyInfo.role}</h2>
-              <p className="companyInfoDetail">내용내용내용</p>
+              <h2 className="companyInfoTitle">주요업무</h2>
+              <p className="companyInfoDetail">{companyInfo.role}</p>
             </div>
           </div>
           <div className="companyWantedBox">
             <div className="companyWanted">
-              <p>{companyInfo.carrer}</p>
-              <p>{companyInfo.education}</p>
-              <p>{companyInfo.deadLine}</p>
-              <p>{companyInfo.workArea}</p>
+              <p>경력</p>
+              <p>학력</p>
+              <p>마감일</p>
+              <p>근무지역</p>
             </div>
             <div className="companyWantedInfo">
-              <p>경력내용</p>
-              <p>학력내용</p>
-              <p>마감일내용</p>
-              <p>근무지역내용</p>
+              <p>{companyInfo.career}</p>
+              <p>{companyInfo.education}</p>
+              <p>{companyInfo.deadline}</p>
+              <p>{companyInfo.workArea}</p>
             </div>
           </div>
           <div className="companyIntroBox">
             <h2 className="companyIntro">기업/서비스 소개</h2>
-            <img src={companyInfo.companyImage} alt="이미지불러오기 실패" />;
-            <div className="companyIntroDetail">
+            <img src={companyInfo.companyImage} alt="회사 소개" />;
+            {/* <div className="companyIntroDetail">
               회사소개소개소개소개소개소개
-            </div>
+            </div> */}
             <button className="companyIntroBtn">기업/서비스 소개 더보기</button>
           </div>
         </div>

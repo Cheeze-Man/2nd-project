@@ -1,11 +1,10 @@
 @import '../../styles/variables.scss';
 
 .positions {
-  position: fixed;
-  inset: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 150px;
 
   .positionContainer {
     width: 1060px;
