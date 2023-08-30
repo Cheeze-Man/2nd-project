@@ -20,17 +20,12 @@ export default function Resumes() {
       navigate(-1);
     }
 
-    fetch(`http://10.58.52.249:3000/resumes`, {
+    fetch(`http://10.58.52.96:3000/resumes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: `${token}`,
       },
-      // body: JSON.stringify({ accessToken: token }),
-      // headers: {
-      //   'Content-Type': 'application/json;charset=utf-8',
-      // },
-      // body: JSON.stringify({ accessToken: token }),
     })
       .then(res => res.json())
       .then(data => setResumes(data.data));

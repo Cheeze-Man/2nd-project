@@ -11,11 +11,8 @@ export default function ResumeCard({ resume, onClick }) {
   const [isActive, setIsActive] = useState(resumeInfo.display);
 
   useEffect(() => {
-    fetch(`http://10.58.52.249:3000/resumes`, {
+    fetch(`http://10.58.52.96:3000/resumes`, {
       method: 'GET',
-      // headers: {
-      //   'Content-Type': 'application/json;charset=utf-8',
-      // },
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: `${token}`,
@@ -32,9 +29,9 @@ export default function ResumeCard({ resume, onClick }) {
   };
 
   return (
-    <div className="resumeCard" onClick={onClick}>
+    <div className="resumeCard">
       <HiOutlineDotsVertical className="threeDotsVertical" />
-      <div className="resumeCardTop">
+      <div className="resumeCardTop" onClick={onClick}>
         <h3 className="resumeCardTitle">{resumeInfo.title}</h3>
         <div className="resumeCardStatus">
           <div className="resumeInfoStatus">

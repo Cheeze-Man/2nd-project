@@ -4,7 +4,6 @@ import { GrBriefcase, GrMailOption, GrCalendar, GrPhone } from 'react-icons/gr';
 import { SiGithub, SiNotion, SiBlogger } from 'react-icons/si';
 import { TbTrash, TbFolderDown } from 'react-icons/tb';
 import './ResumeDetail.scss';
-import FileAttachmentContainer from './FileAttachmentContainer';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
 
@@ -246,7 +245,6 @@ export default function ResumeDetail() {
       [name]: value,
     }));
   };
-  // console.log(resumeData);
 
   const handleEducation = (e, i) => {
     const { name, value } = e.target;
@@ -294,49 +292,33 @@ export default function ResumeDetail() {
     });
   };
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileChange = event => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
+  // const handleFileChange = event => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
+  //   if (file) {
+  //     const formData = new FormData();
+  //     formData.append('file', file);
 
-      fetch(`http://127.0.0.1:3000/uploads`, {
-        method: 'POST',
-        body: formData,
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('파일 업로드 성공:', data);
-        })
-        .catch(error => {
-          console.error('파일 업로드 실패:', error);
-        });
-    }
-  };
-
-  // useEffect(() => {
-  //   if (resumeId !== undefined) {
-  //     fetch(`http://10.58.52.249:3000/resumes/${resumeId}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `${token}`,
-  //       },
+  //     fetch(`http://127.0.0.1:3000/uploads`, {
+  //       method: 'POST',
+  //       body: formData,
   //     })
-  //       .then(res => res.json())
+  //       .then(response => response.json())
   //       .then(data => {
-  //         setResumeData(data.data[0]);
-  //         console.log(resumeData);
+  //         console.log('파일 업로드 성공:', data);
+  //       })
+  //       .catch(error => {
+  //         console.error('파일 업로드 실패:', error);
   //       });
   //   }
-  // }, []);
+  // };
+
   useEffect(() => {
     if (resumeId !== undefined) {
-      fetch(`http://10.58.52.249:3000/resumes/${resumeId}`, {
+      fetch(`http://10.58.52.96:3000/resumes/${resumeId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -391,20 +373,8 @@ export default function ResumeDetail() {
     }
   }, []);
 
-  // const handleResumePost = () => {
-  //   fetch(`http://10.58.52.249:3000/resumes`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       Authorization: `${token}`,
-  //     },
-  //     body: JSON.stringify(resumeData),
-  //   })
-  //     .then(res => res.json())
-  //     .then(() => {
-  //       navigate('/resumes');
-  //     });
-  // };
+  const handleFileUpload = () => {};
+
   const handleResumePost = () => {
     if (resumeData.title === '') {
       alert('이력서 제목은 필수 항목입니다.');
@@ -415,7 +385,7 @@ export default function ResumeDetail() {
 
       titleInputRef.current.focus();
     } else {
-      fetch(`http://10.58.52.249:3000/resumes`, {
+      fetch(`http://10.58.52.96:3000/resumes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -892,7 +862,7 @@ export default function ResumeDetail() {
             <label className="fileInputButton">
               <input
                 type="file"
-                onChange={handleFileChange}
+                onChange={handleFileUpload}
                 className="fileInput addButton"
               />
               <span className="plusMark">+</span>
