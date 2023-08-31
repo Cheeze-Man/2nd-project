@@ -1,48 +1,26 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Nav from './components/Nav/Nav';
 import Main from './pages/Main/Main';
-import Nav from './components/Nav';
-import Positions from './pages/Positions/Positions';
-import PositionsDetail from './pages/Positions/PositionsDetail';
-
-const Layout = ({ children }) => {
-  return (
-    <>
-      <Nav />
-      {children}
-    </>
-  );
-};
+import MyJumpit from './pages/MyJumpit/MyJumpit';
+import Resumes from './pages/Resumes/Resumes';
+import ResumeDetail from './pages/Resumes/ResumeDetail';
+import NotFound from './components/NotFound';
+import Footer from './components/Footer/Footer';
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <Main />
-            </Layout>
-          }
-        />
-        <Route
-          path="/positions"
-          element={
-            <Layout>
-              <Positions />
-            </Layout>
-          }
-        />
-        <Route
-          path="/positions/:id"
-          element={
-            <Layout>
-              <PositionsDetail />
-            </Layout>
-          }
-        />
+        <Route path="/" element={<Main />} />
+        <Route path="/myjumpit" element={<MyJumpit />} />
+        <Route path="/resumes" element={<Resumes />} />
+        <Route path="/resume/new" element={<ResumeDetail />} />
+        <Route path="/resume/:resumeId" element={<ResumeDetail />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
