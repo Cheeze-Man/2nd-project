@@ -1,0 +1,49 @@
+.footerBackGround {
+  width: 100%;
+  background-color: #fbfbfb;
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    width: 1060px;
+    margin: 0 auto 0px;
+    padding: 70px 0 20px;
+
+    .footerLogo {
+      width: 8%;
+      height: 33px;
+    }
+
+    .footerInformations {
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      color: #888888;
+    }
+
+    .snsIcons {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 7px;
+    }
+
+    .footerLinks {
+      font-size: 14px;
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        a {
+          color: #444444;
+        }
+      }
+    }
+  }
+}

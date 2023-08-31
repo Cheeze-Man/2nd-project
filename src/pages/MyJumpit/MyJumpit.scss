@@ -1,0 +1,25 @@
+@import '../../styles/variables.scss';
+
+.myJumpitBackGround {
+  position: relative;
+  padding-top: 170px;
+  padding-bottom: 0.1px;
+
+  .myJumpit {
+    width: 1060px;
+    margin: 0px auto;
+    display: flex;
+
+    .leftSpace {
+      padding-bottom: 252px;
+
+      .leftBar {
+        width: 240px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: fixed;
+      }
+    }
+  }
+}

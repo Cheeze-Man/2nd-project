@@ -1,0 +1,108 @@
+@import '../../styles/variables.scss';
+
+#header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 10;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  border-bottom: 1px solid rgb(228, 228, 228);
+
+  .nav {
+    position: relative;
+    max-width: 1060px;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .navTop {
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        width: 100px;
+        height: 50px;
+        cursor: pointer;
+      }
+
+      .searchBar {
+        width: 520px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $green;
+        border-radius: 100px;
+
+        .searchIcon {
+          color: $green;
+          width: 24px;
+          height: 24px;
+          margin-left: 15px;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+      .seachBarInput {
+        width: 100%;
+        margin-right: 15px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+      }
+    }
+
+    .navBottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 56px;
+
+      .categories {
+        .categoryLink {
+          margin-right: 40px;
+          color: black;
+        }
+      }
+
+      .userServise {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+
+        .iconDown {
+          &:hover {
+            transform: rotate(180deg);
+          }
+        }
+
+        .userInfo {
+          .userInfoLink,
+          span {
+            color: black;
+            font-size: 15px;
+            font-weight: 500;
+          }
+
+          .induction {
+            background-color: black;
+            color: white;
+            padding: 0 5px;
+            border-radius: 3px;
+          }
+        }
+        .companyService {
+          color: #222222;
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
