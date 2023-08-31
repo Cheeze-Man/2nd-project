@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Card from '../../components/Card.jsx';
 import PositionBtn from '../Positions/PositionBtn.jsx';
 import './Positions.scss';
@@ -51,7 +51,7 @@ export default function Positions() {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.68:3000/positions?${searchParams}`)
+    fetch(`http://10.58.52.187:3000/positions?${searchParams}`)
       .then(response => response.json())
       .then(job => {
         setJobCategoryList(job.jobTypes);
@@ -86,8 +86,10 @@ export default function Positions() {
         </div>
       </div>
       <div className="cardListDiv">
-        <button onClick={() => handleSort('popular')}>인기순(조회순)</button>
-        <button onClick={() => handleSort('reg_dt')}>최신순</button>
+        <div className="cardListDivBtnStyle">
+          <button onClick={() => handleSort('popular')}>조회순</button>
+          <button onClick={() => handleSort('reg_dt')}>최신순</button>
+        </div>
         <div className="cardListStyle">
           <div className="cardList">
             {companyList.map(

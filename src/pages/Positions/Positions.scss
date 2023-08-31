@@ -27,10 +27,27 @@
 
     .cardListStyle {
       width: 1060px;
+      border-top: 1px solid black;
 
       .cardList {
         display: flex;
         flex-wrap: wrap;
+      }
+    }
+
+    .cardListDivBtnStyle {
+      width: 100%;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        border: 0px;
+
+        &:hover {
+          color: red;
+          cursor: pointer;
+        }
       }
     }
   }

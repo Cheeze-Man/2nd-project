@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './PositionsDetail.scss';
+import PositionApplyBtn from './PositionApplyBtn';
 
 export default function PositionsDetail() {
   const [companyInfo, setCompanyInfo] = useState({});
@@ -8,14 +9,12 @@ export default function PositionsDetail() {
   const id = params.id;
 
   useEffect(() => {
-    fetch(`http://10.58.52.68:3000/positions/${id}`)
+    fetch(`http://10.58.52.187:3000/positions/${id}`)
       .then(response => response.json())
       .then(data => {
         setCompanyInfo(data.data[0]);
       });
   }, [params]);
-
-  console.log(companyInfo);
 
   return (
     <div className="positionsDetail">
@@ -47,31 +46,24 @@ export default function PositionsDetail() {
           </div>
           <div className="companyIntroBox">
             <h2 className="companyIntro">기업/서비스 소개</h2>
-            <img src={companyInfo.companyImage} alt="회사 소개" />;
-            {/* <div className="companyIntroDetail">
-              회사소개소개소개소개소개소개
-            </div> */}
-            <button className="companyIntroBtn">기업/서비스 소개 더보기</button>
+            <img src={companyInfo.companyImage} alt="회사 소개" />
           </div>
         </div>
 
-        <div className="positionFixed">
-          <div className="positionFixedInfo">
-            <div className="positionFixedHeader">
+        <div className="positionSticky">
+          <div className="positionStickyInfo">
+            <div className="positionStickyHeader">
               <p>이 포지션 면접 질문이 궁금하다면?</p>
               <Link to="">AI 면접 코치</Link>
             </div>
-            <div className="positionFixedBody">
-              <img
-                src="https://cdn.jumpit.co.kr/sm/images/hmlee_4/20212709142748010_622_598.webp"
-                alt="기업로고"
-              />
-              <div className="positionFixedBodyInfo">
-                <p>[부산] React 개발자(3년 이상)</p>
-                <span>티엔에이치</span>
+            <div className="positionStickyBody">
+              <img src={companyInfo.companyImage} alt="회사 로고" />
+              <div className="positionStickyBodyInfo">
+                <p>{companyInfo.title}</p>
+                <span>{companyInfo.companyName}</span>
               </div>
-              <button className="positionFixedBtn">취업축하금 70만원</button>
-              <button className="positionFixedResumeBtn">지원하기</button>
+              <button className="positionStickyBtn">취업축하금 70만원</button>
+              <PositionApplyBtn />
             </div>
           </div>
         </div>

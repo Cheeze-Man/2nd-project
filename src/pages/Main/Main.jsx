@@ -25,7 +25,6 @@ export default function Main() {
 
   return (
     <div>
-      <Nav />
       Main Page
       <Card
         urlLink={cardData.urlLink}

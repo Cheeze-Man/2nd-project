@@ -74,18 +74,18 @@
   }
 }
 
-.positionFixed {
+.positionSticky {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .positionFixedInfo {
+  .positionStickyInfo {
     position: sticky;
     top: 150px;
     right: 50px;
     width: 340px;
     border: 1px solid black;
-    .positionFixedHeader {
+    .positionStickyHeader {
       height: 48px;
       border-bottom: 1px solid black;
       display: flex;
@@ -99,7 +99,7 @@
       // Link {
       // }
     }
-    .positionFixedBody {
+    .positionStickyBody {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -110,7 +110,7 @@
         border: 1px solid black;
         border-radius: 100px;
       }
-      .positionFixedBodyInfo {
+      .positionStickyBodyInfo {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -122,21 +122,12 @@
           margin-bottom: 16px;
         }
       }
-      .positionFixedBtn {
+      .positionStickyBtn {
         width: 144px;
         height: 24px;
         border-radius: 100px;
         margin-bottom: 24px;
         border: 0px;
-      }
-      .positionFixedResumeBtn {
-        width: 274px;
-        height: 48px;
-        margin-bottom: 16px;
-        color: white;
-        background-color: $green;
-        border: 0px;
-        border-radius: 5px;
       }
     }
   }
