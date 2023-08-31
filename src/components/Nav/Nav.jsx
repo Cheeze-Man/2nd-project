@@ -65,15 +65,7 @@ export default function Nav() {
                 <span>ㆍ</span>
               </div>
             )}
-            <Link
-              to="#"
-              className="companyService"
-              onClick={() => {
-                localStorage.setItem('token', 'asdjhasjkdh1234');
-                localStorage.setItem('username', 'test user');
-                localStorage.setItem('email', 'test@test.com');
-              }}
-            >
+            <Link to="#" className="companyService">
               {' '}
               기업 서비스
             </Link>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './Footer.scss';
 
 const FOOTER_ICONS = [
@@ -65,7 +66,15 @@ const FOOTER_LINKS = [
   ],
 ];
 
+const EXCEPTION_PATH = ['/resume/'];
+
 export default function Footer() {
+  const { pathname } = useLocation();
+
+  const isException = EXCEPTION_PATH.some(path => pathname.includes(path));
+
+  if (isException) return null;
+
   return (
     <div className="footerBackGround">
       <footer className="footer">

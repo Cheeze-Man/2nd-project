@@ -26,14 +26,13 @@ export default function ModalPassword({ email, handleModal }) {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email,
+        password,
       }),
     })
       .then(res => res.json())
       .then(data => {
-        if (data) {
-          console.log(data);
+        if (data.accessToken) {
           localStorage.setItem('token', data.accessToken);
           localStorage.setItem('email', data.email);
           localStorage.setItem('username', data.username);

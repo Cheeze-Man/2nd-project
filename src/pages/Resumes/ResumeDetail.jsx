@@ -348,9 +348,7 @@ export default function ResumeDetail() {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('fileInput', selectedFile);
-      // for (let key of formData.keys()) {
-      //   console.log(key, ':', formData.get(key));
-      // }
+
       fetch('http://10.58.52.134:3000/uploads', {
         method: 'POST',
         headers: {
@@ -360,8 +358,6 @@ export default function ResumeDetail() {
       })
         .then(res => res.json())
         .then(data => {
-          const message = data.message;
-          // if (message === 'upload complete') {
           const path = data.path;
           const originalName = selectedFile.name;
           const uploadedName = path.split('/')[2];
@@ -377,11 +373,6 @@ export default function ResumeDetail() {
             ...prev,
             resumeAddFile: [...prev.resumeAddFile, newFile],
           }));
-
-          console.log(resumeData);
-          // } else {
-          //   console.log(message);
-          // }
         })
         .catch(error => {
           console.error('파일 업로드 실패...', error);
@@ -429,7 +420,6 @@ export default function ResumeDetail() {
     }
   };
 
-  console.log(resumeData);
   return (
     <div className="resumeDetail">
       <div className="resumeDetailContainer">

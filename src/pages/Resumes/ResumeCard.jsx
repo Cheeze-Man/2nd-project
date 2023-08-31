@@ -13,15 +13,15 @@ export default function ResumeCard({ resume, onClick }) {
   const [resumeInfo, setResumeInfo] = useState(resume);
   const [isActive, setIsActive] = useState(resumeInfo.display);
 
-  useEffect(() => {
-    fetch(`http://10.58.52.134:3000/resumes`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `${token}`,
-      },
-    }).then(res => res.json());
-  }, [resumeInfo]);
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.134:3000/resumes`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       Authorization: `${token}`,
+  //     },
+  //   }).then(res => res.json());
+  // }, [resumeInfo]);
 
   const handleDisplay = () => {
     setIsActive(!isActive);
@@ -33,7 +33,6 @@ export default function ResumeCard({ resume, onClick }) {
 
   const handleDeleteResumeCard = () => {
     const deleteId = resumeInfo.resumeId;
-    console.log(deleteId);
     fetch(`http://10.58.52.134:3000/resumes/${deleteId}`, {
       method: 'DELETE',
       headers: {
@@ -41,18 +40,23 @@ export default function ResumeCard({ resume, onClick }) {
         Authorization: `${token}`,
       },
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          window.location.reload();
+
+          return;
+        }
+
+        res.json();
+      })
       .then(data => {
         console.log(data);
       })
       .catch(error => console.error(error));
-
-    navigate('/resumes');
   };
 
   return (
     <div className="resumeCard">
-      {/* <HiOutlineDotsVertical className="threeDotsVertical" /> */}
       <button className="deleteButton" onClick={handleDeleteResumeCard}>
         <TbTrash />
       </button>
