@@ -86,7 +86,7 @@ export default function ResumeDetail() {
         endYear: '',
         endMonth: '',
         companyName: '',
-        divison: '',
+        division: '',
         role: '',
         developer: 1,
       },
@@ -170,7 +170,7 @@ export default function ResumeDetail() {
           endYear: '',
           endMonth: '',
           companyName: '',
-          divison: '',
+          division: '',
           role: '',
           developer: 1,
         },
@@ -222,14 +222,25 @@ export default function ResumeDetail() {
       resumeProject: updatedProject,
     }));
   };
-  // const handleDeleteFile = index => {
-  //   const updatedFile = resumeData.resumeAddFile.filter((_, i) => i !== index);
 
-  //   setResumeData(prevData => ({
-  //     ...prevData,
-  //     resumeAddFile: updatedFile,
-  //   }));
-  // };
+  const handleDeleteFile = index => {
+    const updatedFile = resumeData.resumeAddFile.filter((_, i) => i !== index);
+
+    setResumeData(prevData => ({
+      ...prevData,
+      resumeAddFile: updatedFile,
+    }));
+
+    fetch(
+      `http://10.58.52.134:3000/resumes/addfiles/${resumeData.resumeId}/${resumeData.resumeAddFile[index].fileId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `${token}`,
+        },
+      },
+    );
+  };
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -313,7 +324,7 @@ export default function ResumeDetail() {
                 endYear: '',
                 endMonth: '',
                 companyName: '',
-                divison: '',
+                division: '',
                 role: '',
                 developer: 1,
               },
@@ -341,6 +352,7 @@ export default function ResumeDetail() {
         });
     }
   }, []);
+  console.log(resumeData);
 
   const handleFileChange = event => {
     const selectedFile = event.target.files[0];
@@ -750,8 +762,8 @@ export default function ResumeDetail() {
                         type="text"
                         className="careersInput"
                         placeholder="부서명"
-                        value={career.divison}
-                        name="divison"
+                        value={career.division}
+                        name="division"
                         onChange={e => handleCareer(e, i)}
                       />
                       <input
@@ -873,6 +885,12 @@ export default function ResumeDetail() {
                       <TbFolderDown className="folderIcon" />
                       {file.originFileName}
                     </a>
+                    <button
+                      className="deleteButton"
+                      onClick={() => handleDeleteFile(i)}
+                    >
+                      <TbTrash />
+                    </button>
                   </li>
                 ))
               ) : (

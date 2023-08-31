@@ -9,7 +9,7 @@ const username = localStorage.getItem('username');
 const NAV_CATEGORIES = [
   {
     title: '직무 탐색',
-    path: '/jobsearch',
+    path: '/positions',
   },
   {
     title: '이력서',
