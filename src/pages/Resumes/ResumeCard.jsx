@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TbTrash } from 'react-icons/tb';
 import { BsDot } from 'react-icons/bs';
 import './ResumeCard.scss';
@@ -12,16 +12,6 @@ export default function ResumeCard({ resume, onClick }) {
 
   const [resumeInfo, setResumeInfo] = useState(resume);
   const [isActive, setIsActive] = useState(resumeInfo.display);
-
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.134:3000/resumes`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       Authorization: `${token}`,
-  //     },
-  //   }).then(res => res.json());
-  // }, [resumeInfo]);
 
   const handleDisplay = () => {
     setIsActive(!isActive);

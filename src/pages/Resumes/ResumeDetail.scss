@@ -434,20 +434,32 @@ input[type='number'] {
         }
       }
       .deleteButton {
-        border: 1px solid #999999;
+        color: #999999;
+        border: none;
         border-radius: 5px;
         background-color: transparent;
         height: 28px;
-        width: 56px;
+        width: 30px;
         font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.5s ease;
+        svg {
+          transition: transform 0.5s ease;
+        }
+
         &:hover {
           background-color: $green;
           & svg {
-            transform: rotate(23deg);
+            transform: rotate(60deg);
+            color: black;
           }
         }
       }
+
       .addButton {
         margin: 20px 0;
         padding-left: 0;
@@ -690,6 +702,33 @@ input[type='number'] {
       width: 100%;
       justify-content: space-between;
 
+      .deleteButton {
+        color: #999999;
+        border: none;
+        border-radius: 5px;
+        background-color: transparent;
+        height: 28px;
+        width: 30px;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.5s ease;
+        svg {
+          transition: transform 0.5s ease;
+        }
+
+        &:hover {
+          background-color: $green;
+          & svg {
+            transform: rotate(60deg);
+            color: black;
+          }
+        }
+      }
+
       a {
         cursor: pointer;
         color: #222222;
@@ -700,6 +739,7 @@ input[type='number'] {
         font-weight: 500;
         width: 90%;
       }
+
       .folderIcon {
         font-size: 30px;
       }
