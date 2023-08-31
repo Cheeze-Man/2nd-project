@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
+import { TbTrash } from 'react-icons/tb';
 import { BsDot } from 'react-icons/bs';
 import './ResumeCard.scss';
+import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = process.env.REACT_APP_API_KEY;
 const token = localStorage.getItem('token');
 
 export default function ResumeCard({ resume, onClick }) {
+  const navigate = useNavigate();
+
   const [resumeInfo, setResumeInfo] = useState(resume);
   const [isActive, setIsActive] = useState(resumeInfo.display);
 
@@ -28,9 +31,31 @@ export default function ResumeCard({ resume, onClick }) {
     }));
   };
 
+  const handleDeleteResumeCard = () => {
+    const deleteId = resumeInfo.resumeId;
+    console.log(deleteId);
+    fetch(`http://10.58.52.134:3000/resumes/${deleteId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => console.error(error));
+
+    navigate('/resumes');
+  };
+
   return (
     <div className="resumeCard">
-      <HiOutlineDotsVertical className="threeDotsVertical" />
+      {/* <HiOutlineDotsVertical className="threeDotsVertical" /> */}
+      <button className="deleteButton" onClick={handleDeleteResumeCard}>
+        <TbTrash />
+      </button>
       <div className="resumeCardTop" onClick={onClick}>
         <h3 className="resumeCardTitle">{resumeInfo.title}</h3>
         <div className="resumeCardStatus">

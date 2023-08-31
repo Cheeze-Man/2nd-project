@@ -399,20 +399,36 @@ export default function ResumeDetail() {
 
       titleInputRef.current.focus();
     } else {
-      fetch(`http://10.58.52.134:3000/resumes`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          Authorization: `${token}`,
-        },
-        body: JSON.stringify(resumeData),
-      })
-        .then(res => res.json())
-        .then(() => {
-          navigate('/resumes');
-        });
+      if (resumeData.resumeId) {
+        fetch(`http://10.58.52.134:3000/resumes/${resumeData.resumeId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `${token}`,
+          },
+          body: JSON.stringify(resumeData),
+        })
+          .then(res => res.json())
+          .then(() => {
+            navigate('/resumes');
+          });
+      } else {
+        fetch(`http://10.58.52.134:3000/resumes`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `${token}`,
+          },
+          body: JSON.stringify(resumeData),
+        })
+          .then(res => res.json())
+          .then(() => {
+            navigate('/resumes');
+          });
+      }
     }
   };
+
   console.log(resumeData);
   return (
     <div className="resumeDetail">
