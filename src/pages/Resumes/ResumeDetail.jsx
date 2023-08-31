@@ -101,14 +101,7 @@ export default function ResumeDetail() {
         repositoryLink: '',
       },
     ],
-    resumeAddFile: [
-      {
-        fileId: '',
-        fileUrl: '',
-        originFilename: '',
-        uploadedFileName: '',
-      },
-    ],
+    resumeAddFile: [],
   });
 
   const LINKS = [
@@ -292,33 +285,9 @@ export default function ResumeDetail() {
     });
   };
 
-  // const [selectedFile, setSelectedFile] = useState(null);
-
-  // const handleFileChange = event => {
-  //   const file = event.target.files[0];
-  //   setSelectedFile(file);
-
-  //   if (file) {
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-
-  //     fetch(`http://127.0.0.1:3000/uploads`, {
-  //       method: 'POST',
-  //       body: formData,
-  //     })
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         console.log('파일 업로드 성공:', data);
-  //       })
-  //       .catch(error => {
-  //         console.error('파일 업로드 실패:', error);
-  //       });
-  //   }
-  // };
-
   useEffect(() => {
     if (resumeId !== undefined) {
-      fetch(`http://10.58.52.96:3000/resumes/${resumeId}`, {
+      fetch(`http://10.58.52.134:3000/resumes/${resumeId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -363,7 +332,7 @@ export default function ResumeDetail() {
               {
                 fileId: '',
                 fileUrl: '',
-                originFilename: '',
+                originFileName: '',
                 uploadedFileName: '',
               },
             ],
@@ -373,7 +342,52 @@ export default function ResumeDetail() {
     }
   }, []);
 
-  const handleFileUpload = () => {};
+  const handleFileChange = event => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('fileInput', selectedFile);
+      // for (let key of formData.keys()) {
+      //   console.log(key, ':', formData.get(key));
+      // }
+      fetch('http://10.58.52.134:3000/uploads', {
+        method: 'POST',
+        headers: {
+          Authorization: `${token}`,
+        },
+        body: formData,
+      })
+        .then(res => res.json())
+        .then(data => {
+          const message = data.message;
+          // if (message === 'upload complete') {
+          const path = data.path;
+          const originalName = selectedFile.name;
+          const uploadedName = path.split('/')[2];
+
+          const newFile = {
+            fileId: '',
+            fileUrl: path,
+            originFileName: originalName,
+            uploadedFileName: uploadedName,
+          };
+
+          setResumeData(prev => ({
+            ...prev,
+            resumeAddFile: [...prev.resumeAddFile, newFile],
+          }));
+
+          console.log(resumeData);
+          // } else {
+          //   console.log(message);
+          // }
+        })
+        .catch(error => {
+          console.error('파일 업로드 실패...', error);
+        });
+    }
+  };
 
   const handleResumePost = () => {
     if (resumeData.title === '') {
@@ -385,7 +399,7 @@ export default function ResumeDetail() {
 
       titleInputRef.current.focus();
     } else {
-      fetch(`http://10.58.52.96:3000/resumes`, {
+      fetch(`http://10.58.52.134:3000/resumes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -840,7 +854,9 @@ export default function ResumeDetail() {
               (PDF를 권장합니다.)
             </p>
             <ul className="files">
-              {resumeData.resumeAddFile[0].fileId !== '' ? (
+              {resumeData.resumeAddFile.length > 0 &&
+              resumeData.resumeAddFile !== null &&
+              resumeData.resumeAddFile[0].originFileName !== '' ? (
                 resumeData.resumeAddFile.map((file, i) => (
                   <li className="fileItem" key={i}>
                     <a
@@ -849,7 +865,7 @@ export default function ResumeDetail() {
                       rel="noopener noreferrer"
                     >
                       <TbFolderDown className="folderIcon" />
-                      {file.fileId}
+                      {file.originFileName}
                     </a>
                   </li>
                 ))
@@ -862,8 +878,9 @@ export default function ResumeDetail() {
             <label className="fileInputButton">
               <input
                 type="file"
-                onChange={handleFileUpload}
+                onChange={handleFileChange}
                 className="fileInput addButton"
+                name="fileInput"
               />
               <span className="plusMark">+</span>
               첨부파일 추가

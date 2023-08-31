@@ -70,8 +70,8 @@ export default function Nav() {
               className="companyService"
               onClick={() => {
                 localStorage.setItem('token', 'asdjhasjkdh1234');
-                localStorage.setItem('username', '박동철');
-                localStorage.setItem('email', 'email@test.com');
+                localStorage.setItem('username', 'test user');
+                localStorage.setItem('email', 'test@test.com');
               }}
             >
               {' '}

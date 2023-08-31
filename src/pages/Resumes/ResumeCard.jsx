@@ -11,7 +11,7 @@ export default function ResumeCard({ resume, onClick }) {
   const [isActive, setIsActive] = useState(resumeInfo.display);
 
   useEffect(() => {
-    fetch(`http://10.58.52.96:3000/resumes`, {
+    fetch(`http://10.58.52.134:3000/resumes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
