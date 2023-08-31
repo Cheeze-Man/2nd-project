@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './PositionsDetail.scss';
-import PositionApplyBtn from './PositionApplyBtn';
+import ApplyModalStyle from './ApplyModalStyle';
 
 export default function PositionsDetail() {
   const [companyInfo, setCompanyInfo] = useState({});
@@ -15,6 +15,12 @@ export default function PositionsDetail() {
         setCompanyInfo(data.data[0]);
       });
   }, [params]);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openApplyModal = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div className="positionsDetail">
@@ -63,7 +69,19 @@ export default function PositionsDetail() {
                 <span>{companyInfo.companyName}</span>
               </div>
               <button className="positionStickyBtn">취업축하금 70만원</button>
-              <PositionApplyBtn />
+              <div>
+                {!isOpen && (
+                  <button
+                    onClick={openApplyModal}
+                    className="positionStickyResumeBtn"
+                  >
+                    <Link to="" className="positionStickyResumeBtnStyle">
+                      지원하기
+                    </Link>
+                  </button>
+                )}
+                {isOpen && <ApplyModalStyle setIsOpen={setIsOpen} />}
+              </div>
             </div>
           </div>
         </div>

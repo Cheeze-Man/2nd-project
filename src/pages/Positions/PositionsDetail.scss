@@ -129,6 +129,22 @@
         margin-bottom: 24px;
         border: 0px;
       }
+
+      .positionStickyResumeBtn {
+        width: 274px;
+        height: 48px;
+        margin-bottom: 16px;
+        background-color: $green;
+        border: 0px;
+        border-radius: 5px;
+
+        .positionStickyResumeBtnStyle {
+          color: white;
+        }
+        &:hover {
+          background-color: rgb(0, 160, 0);
+        }
+      }
     }
   }
 }
