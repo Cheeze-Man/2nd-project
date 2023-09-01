@@ -230,7 +230,7 @@ export default function ResumeDetail() {
     }));
 
     fetch(
-      `http://10.58.52.134:3000/resumes/addfiles/${resumeData.resumeId}/${resumeData.resumeAddFile[index].fileId}`,
+      `http://10.58.52.236:3000/resumes/addfiles/${resumeData.resumeId}/${resumeData.resumeAddFile[index].fileId}`,
       {
         method: 'DELETE',
         headers: {
@@ -337,14 +337,16 @@ export default function ResumeDetail() {
                 repositoryLink: '',
               },
             ],
-            resumeAddFile: data.data[0].resumeAddFile || [
-              {
-                fileId: '',
-                fileUrl: '',
-                originFileName: '',
-                uploadedFileName: '',
-              },
-            ],
+            resumeAddFile:
+              data.data[0].resumeAddFile ||
+              [
+                // {
+                //   fileId: '',
+                //   fileUrl: '',
+                //   originFileName: '',
+                //   uploadedFileName: '',
+                // },
+              ],
           };
           setResumeData(updatedResumeData);
         });

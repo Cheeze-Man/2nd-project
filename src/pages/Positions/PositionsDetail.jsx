@@ -35,6 +35,18 @@ export default function PositionsDetail() {
               <h2 className="companyInfoTitle">주요업무</h2>
               <p className="companyInfoDetail">{companyInfo.role}</p>
             </div>
+            <div className="companyInfo">
+              <h2 className="companyInfoTitle">자격요건</h2>
+              <p className="companyInfoDetail">{companyInfo.qualifications}</p>
+            </div>
+            <div className="companyInfo">
+              <h2 className="companyInfoTitle">우대사항</h2>
+              <p className="companyInfoDetail">{companyInfo.prefferdSkills}</p>
+            </div>
+            <div className="companyInfo">
+              <h2 className="companyInfoTitle">복지 및 혜택</h2>
+              <p className="companyInfoDetail">{companyInfo.benefits}</p>
+            </div>
           </div>
           <div className="companyWantedBox">
             <div className="companyWanted">

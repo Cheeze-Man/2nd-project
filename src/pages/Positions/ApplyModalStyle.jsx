@@ -3,6 +3,8 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import './ApplyModalStyle.scss';
 
+const userEmail = localStorage.getItem('email');
+
 export default function ApplyModalStyle({ setIsOpen }) {
   const closeApplyModal = () => {
     setIsOpen(false);
@@ -25,11 +27,11 @@ export default function ApplyModalStyle({ setIsOpen }) {
         <div className="applyModalInfo">
           <div className="applyModalInfoStyle">
             <div>이메일</div>
-            <div>ㅁㄴㅇㄴㅁㅇ@ㅁㄴㅇ</div>
+            <div>{userEmail}</div>
           </div>
           <div className="applyModalInfoStyle">
             <div>연락처</div>
-            <div>1121213213</div>
+            <div>010-4023-6890</div>
           </div>
         </div>
       </div>
@@ -40,7 +42,7 @@ export default function ApplyModalStyle({ setIsOpen }) {
             <input type="radio" value="" checked="checked" />
           </div>
           <div>
-            <div>ㅇㅇㅇ이력서_230901</div>
+            <div>테스트 이력서_230901</div>
             <div className="applyModalResumeStyle">
               <div>기본정보</div>
               <div>기술스택</div>
