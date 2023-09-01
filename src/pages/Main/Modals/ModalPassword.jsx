@@ -4,8 +4,6 @@ import { GrClose } from 'react-icons/gr';
 import { passwordPattern } from '../../../util/constants';
 import './Modals.scss';
 
-const BASE_URL = process.env.REACT_APP_API_KEY;
-
 export default function ModalPassword({ email, handleModal }) {
   const [password, setPassword] = useState('');
 
@@ -37,6 +35,7 @@ export default function ModalPassword({ email, handleModal }) {
           localStorage.setItem('email', data.email);
           localStorage.setItem('username', data.username);
           closeModal();
+          window.location.reload();
         } else {
           const message = data.message;
           if (message === 'INVALID_USER') {

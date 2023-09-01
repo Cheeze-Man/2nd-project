@@ -6,7 +6,7 @@ export default function CollectionByTheme() {
     <div className="collectionByTheme">
       <div className="themeTopBar">
         <h1 className="themeTitle">테마별 모음.zip</h1>
-        <div className="themeSlideButtons"></div>
+        {/* <div className="themeSlideButtons"></div> */}
       </div>
       <div className="themeBanners">
         <div className="themeBanner firstThemeBanner">

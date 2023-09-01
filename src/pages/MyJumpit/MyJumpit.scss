@@ -19,6 +19,176 @@
         flex-direction: column;
         gap: 20px;
         position: fixed;
+
+        h1 {
+          font-size: 24px;
+        }
+
+        ul {
+          width: 210px;
+          font-size: 15px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          gap: 15px;
+
+          li:last-child {
+            margin-bottom: 20px;
+          }
+        }
+
+        .barTopMenu {
+          border-bottom: 1px solid lightblue;
+        }
+      }
+    }
+
+    .mainContents {
+      position: relative;
+      width: 790px;
+      margin-left: 272px;
+
+      .myJumpitNavigation {
+        height: 118px;
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid black;
+
+        .navigationCategories {
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          text-align: center;
+          position: relative;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          height: 55px;
+          border-left: 1px solid lightblue;
+          &:first-child {
+            border-left: none;
+          }
+
+          p {
+            font-size: 17px;
+          }
+          h2 {
+            font-size: 26px;
+          }
+        }
+      }
+
+      .applyListContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 45px;
+
+        .applyListContainerTitle {
+          display: flex;
+          width: 100%;
+          padding: 0 0 16px;
+          color: #222222;
+          font-size: 20px;
+          border-bottom: 1px solid #222222;
+        }
+
+        .applyList {
+          height: 105px;
+          padding: 20px 0;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          border-bottom: 1px solid lightblue;
+          li {
+            display: flex;
+            width: 100%;
+
+            .applyCompnyInfo {
+              display: flex;
+              flex-direction: column;
+              align-items: start;
+              width: 70%;
+
+              p {
+                color: #444444;
+                font-size: 14px;
+                margin-bottom: 10px;
+              }
+              h3 {
+                font-weight: 500;
+                font-size: 17px;
+                padding: 1px 0px;
+                line-height: 24px;
+                margin-bottom: 14px;
+              }
+            }
+
+            .applyListButtons {
+              border: none;
+              width: 30%;
+              display: flex;
+              align-items: center;
+              justify-content: space-evenly;
+
+              .confirmButtom {
+                width: 132px;
+                height: 32px;
+                border: none;
+                border-radius: 4px;
+                background-color: $green;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                font-weight: 500;
+                padding: 0 16px;
+                cursor: pointer;
+                transition: all 0.5s ease;
+
+                &:hover {
+                  background-color: rgb(85, 182, 85);
+                }
+              }
+
+              .deleteButton {
+                color: #999999;
+                border: none;
+                border-radius: 5px;
+                background-color: transparent;
+                height: 28px;
+                width: 30px;
+                font-size: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+                transition: background-color 0.5s ease;
+                svg {
+                  transition: transform 0.5s ease;
+                }
+
+                &:hover {
+                  background-color: $green;
+                  & svg {
+                    transform: rotate(60deg);
+                    color: black;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

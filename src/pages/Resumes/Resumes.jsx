@@ -4,8 +4,6 @@ import ResumeCard from './ResumeCard';
 import AddResume from './AddResume';
 import './Resumes.scss';
 
-const BASE_URL = process.env.REACT_APP_API_KEY;
-
 export default function Resumes() {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
