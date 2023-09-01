@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { emailPattern } from '../../util/constants';
 import LoginModal from './LoginModal';
 import ModalPassword from './Modals/ModalPassword';

@@ -7,8 +7,6 @@ import {
 } from '../../../util/constants';
 import './Modals.scss';
 
-const BASE_URL = process.env.REACT_APP_API_KEY;
-
 export default function ModalJoin({ handleModal, email }) {
   const [joinUserInfo, setJoinUserInfo] = useState({
     email: email,
@@ -41,6 +39,7 @@ export default function ModalJoin({ handleModal, email }) {
       .then(data => {
         const message = data.message;
         if (message === 'user is created') {
+          alert('회원가입이 완료되었습니다.');
           handleModal('login');
         } else if (message === 'dataSource Error #createUser') {
           alert('가입 실패 ㅠㅠ');

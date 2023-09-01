@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { TbTrash } from 'react-icons/tb';
 import { BsDot } from 'react-icons/bs';
 import './ResumeCard.scss';
-import { useNavigate } from 'react-router-dom';
 
-const BASE_URL = process.env.REACT_APP_API_KEY;
 const token = localStorage.getItem('token');
 
 export default function ResumeCard({ resume, onClick }) {
-  const navigate = useNavigate();
-
   const [resumeInfo, setResumeInfo] = useState(resume);
   const [isActive, setIsActive] = useState(resumeInfo.display);
 

@@ -5,8 +5,6 @@ import { SiGithub, SiNotion, SiBlogger } from 'react-icons/si';
 import { TbTrash, TbFolderDown } from 'react-icons/tb';
 import './ResumeDetail.scss';
 
-const BASE_URL = process.env.REACT_APP_API_KEY;
-
 const CATEGORIES = [
   { name: '기본정보', scrollY: 0, star: 'redStar' },
   { name: '사진', scrollY: 0, star: '' },
@@ -352,7 +350,6 @@ export default function ResumeDetail() {
         });
     }
   }, []);
-  console.log(resumeData);
 
   const handleFileChange = event => {
     const selectedFile = event.target.files[0];
