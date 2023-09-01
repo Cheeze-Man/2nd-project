@@ -230,7 +230,7 @@ export default function ResumeDetail() {
     }));
 
     fetch(
-      `http://10.58.52.134:3000/resumes/addfiles/${resumeData.resumeId}/${resumeData.resumeAddFile[index].fileId}`,
+      `http://10.58.52.236:3000/resumes/addfiles/${resumeData.resumeId}/${resumeData.resumeAddFile[index].fileId}`,
       {
         method: 'DELETE',
         headers: {
@@ -296,7 +296,7 @@ export default function ResumeDetail() {
 
   useEffect(() => {
     if (resumeId !== undefined) {
-      fetch(`http://10.58.52.187:3000/resumes/${resumeId}`, {
+      fetch(`http://10.58.52.236:3000/resumes/${resumeId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -337,14 +337,16 @@ export default function ResumeDetail() {
                 repositoryLink: '',
               },
             ],
-            resumeAddFile: data.data[0].resumeAddFile || [
-              {
-                fileId: '',
-                fileUrl: '',
-                originFileName: '',
-                uploadedFileName: '',
-              },
-            ],
+            resumeAddFile:
+              data.data[0].resumeAddFile ||
+              [
+                // {
+                //   fileId: '',
+                //   fileUrl: '',
+                //   originFileName: '',
+                //   uploadedFileName: '',
+                // },
+              ],
           };
           setResumeData(updatedResumeData);
         });
@@ -358,7 +360,7 @@ export default function ResumeDetail() {
       const formData = new FormData();
       formData.append('fileInput', selectedFile);
 
-      fetch('http://10.58.52.187:3000/uploads', {
+      fetch('http://10.58.52.236:3000/uploads', {
         method: 'POST',
         headers: {
           Authorization: `${token}`,
@@ -400,7 +402,7 @@ export default function ResumeDetail() {
       titleInputRef.current.focus();
     } else {
       if (resumeData.resumeId) {
-        fetch(`http://10.58.52.187:3000/resumes/${resumeData.resumeId}`, {
+        fetch(`http://10.58.52.236:3000/resumes/${resumeData.resumeId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -413,7 +415,7 @@ export default function ResumeDetail() {
             navigate('/resumes');
           });
       } else {
-        fetch(`http://10.58.52.187:3000/resumes`, {
+        fetch(`http://10.58.52.236:3000/resumes`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',

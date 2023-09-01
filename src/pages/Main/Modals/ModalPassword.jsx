@@ -18,7 +18,7 @@ export default function ModalPassword({ email, handleModal }) {
   };
 
   const handlePostUserInfo = () => {
-    fetch(`http://10.58.52.187:3000/users/signin`, {
+    fetch(`http://10.58.52.236:3000/users/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
