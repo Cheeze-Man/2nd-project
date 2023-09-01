@@ -1,6 +1,5 @@
 @import '../../styles/variables.scss';
 
-// css 추후 작업
 .positionsDetail {
   width: 1060px;
   display: flex;
@@ -8,6 +7,7 @@
   position: relative;
   line-height: 1.5;
   padding-top: 150px;
+  margin: 0 auto;
 
   .positionDetailBox {
     width: 630px;
@@ -60,16 +60,10 @@
     }
 
     .companyIntroBox {
-      // .companyIntro {
-      // }
       img {
         width: 630px;
         height: 340px;
       }
-      // .companyIntroDetail {
-      // }
-      // .companyIntroBtn {
-      // }
     }
   }
 }
@@ -84,7 +78,9 @@
     top: 150px;
     right: 50px;
     width: 340px;
-    border: 1px solid black;
+    border: 1px solid lightgray;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
     .positionStickyHeader {
       height: 48px;
       border-bottom: 1px solid black;
@@ -96,8 +92,6 @@
       p {
         margin-right: 5px;
       }
-      // Link {
-      // }
     }
     .positionStickyBody {
       display: flex;
@@ -137,6 +131,7 @@
         background-color: $green;
         border: 0px;
         border-radius: 5px;
+        cursor: pointer;
 
         .positionStickyResumeBtnStyle {
           color: white;
