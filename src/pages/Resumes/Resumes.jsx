@@ -18,7 +18,7 @@ export default function Resumes() {
       navigate(-1);
     }
 
-    fetch(`http://10.58.52.187:3000/resumes`, {
+    fetch(`http://10.58.52.236:3000/resumes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

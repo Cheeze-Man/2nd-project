@@ -9,7 +9,7 @@ export default function PositionsDetail() {
   const id = params.id;
 
   useEffect(() => {
-    fetch(`http://10.58.52.187:3000/positions/${id}`)
+    fetch(`http://10.58.52.236:3000/positions/${id}`)
       .then(response => response.json())
       .then(data => {
         setCompanyInfo(data.data[0]);
