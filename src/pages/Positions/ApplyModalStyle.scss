@@ -1,0 +1,79 @@
+@import '../../styles/variables.scss';
+
+.applyModalContainer {
+  width: 470px;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: white;
+  border: 1px solid black;
+
+  div,
+  p {
+    padding: 5px;
+  }
+  .modalHeader {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+
+    .applyModalClose {
+      background-color: black;
+      border: 0px;
+
+      .iconAiOutlineCloseCircle {
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
+
+  .applyModalTitle {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .applyModalCompanyName {
+    font-size: 15px;
+    color: gray;
+  }
+
+  .applyModalInfo {
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 5px;
+
+    .applyModalInfoStyle {
+      display: flex;
+    }
+  }
+
+  .applyModalResume {
+    border: 1px solid $green;
+    border-radius: 10px;
+    margin: 5px;
+    display: flex;
+
+    input {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+
+    .applyModalResumeStyle {
+      display: flex;
+    }
+  }
+
+  .applyModalAddFile {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .applyModalAddFileBox {
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 0 5px 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -7,6 +7,8 @@ import Resumes from './pages/Resumes/Resumes';
 import ResumeDetail from './pages/Resumes/ResumeDetail';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer/Footer';
+import Positions from './pages/Positions/Positions';
+import PositionsDetail from './pages/Positions/PositionsDetail';
 
 const Router = () => {
   return (
@@ -18,6 +20,8 @@ const Router = () => {
         <Route path="/resumes" element={<Resumes />} />
         <Route path="/resume/new" element={<ResumeDetail />} />
         <Route path="/resume/:resumeId" element={<ResumeDetail />} />
+        <Route path="/positions" element={<Positions />} />
+        <Route path="/positions/:id" element={<PositionsDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

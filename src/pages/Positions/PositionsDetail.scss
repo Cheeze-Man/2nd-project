@@ -1,0 +1,155 @@
+@import '../../styles/variables.scss';
+
+// css 추후 작업
+.positionsDetail {
+  width: 1060px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  line-height: 1.5;
+  padding-top: 150px;
+
+  .positionDetailBox {
+    width: 630px;
+    padding: 60px 0 24px 0;
+
+    .titleBox {
+      border-bottom: 1px solid gray;
+
+      .titleStyle {
+        margin-bottom: 16px;
+        font-size: 40px;
+      }
+    }
+
+    .companyInfoBox {
+      margin-top: 48px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid gray;
+      .companyInfo {
+        margin-bottom: 25px;
+        .companyInfoTitle {
+          font-size: 18px;
+          padding-bottom: 16px;
+        }
+
+        .companyInfoDetail {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .companyWantedBox {
+      display: flex;
+      border-bottom: 1px solid gray;
+      margin-bottom: 30px;
+
+      .companyWanted {
+        margin-bottom: 30px;
+
+        p {
+          width: 90px;
+          font-weight: bold;
+          font-size: 15px;
+        }
+      }
+      .companyWantedInfo {
+        font-size: 15px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .companyIntroBox {
+      // .companyIntro {
+      // }
+      img {
+        width: 630px;
+        height: 340px;
+      }
+      // .companyIntroDetail {
+      // }
+      // .companyIntroBtn {
+      // }
+    }
+  }
+}
+
+.positionSticky {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .positionStickyInfo {
+    position: sticky;
+    top: 150px;
+    right: 50px;
+    width: 340px;
+    border: 1px solid black;
+    .positionStickyHeader {
+      height: 48px;
+      border-bottom: 1px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: skyblue;
+
+      p {
+        margin-right: 5px;
+      }
+      // Link {
+      // }
+    }
+    .positionStickyBody {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 42px;
+      img {
+        width: 72px;
+        height: 72px;
+        border: 1px solid black;
+        border-radius: 100px;
+      }
+      .positionStickyBodyInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+          margin-top: 16px;
+          margin-bottom: 8px;
+        }
+        span {
+          margin-bottom: 16px;
+        }
+      }
+      .positionStickyBtn {
+        width: 144px;
+        height: 24px;
+        border-radius: 100px;
+        margin-bottom: 24px;
+        border: 0px;
+      }
+
+      .positionStickyResumeBtn {
+        width: 274px;
+        height: 48px;
+        margin-bottom: 16px;
+        background-color: $green;
+        border: 0px;
+        border-radius: 5px;
+
+        .positionStickyResumeBtnStyle {
+          color: white;
+        }
+        &:hover {
+          background-color: rgb(0, 160, 0);
+        }
+      }
+    }
+  }
+}
+
+.positionsContainer {
+  display: flex;
+  justify-content: space-between;
+}

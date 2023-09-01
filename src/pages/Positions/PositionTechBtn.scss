@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.positionTechBtn {
+  display: inline-block;
+  padding: 12px 17px;
+  margin-right: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e5f8ec;
+  border-radius: 100px;
+  color: black;
+  font-size: 20px;
+  background-color: #e5f8ec;
+  cursor: pointer;
+
+  &.clicked {
+    background-color: $green;
+    color: white;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+    }
+  }
+}
