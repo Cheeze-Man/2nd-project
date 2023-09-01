@@ -43,10 +43,11 @@
 
       button {
         border: 0px;
+        cursor: pointer;
 
         &:hover {
-          color: red;
-          cursor: pointer;
+          border-bottom: 1px solid #222222;
+          font-weight: 500;
         }
       }
     }

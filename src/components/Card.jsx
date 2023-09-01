@@ -16,13 +16,13 @@ const Card = ({
         <img src={companyImage} alt="회사사진" className="cardImg" />
         <div className="cardInfo">
           <div className="cardWanted">
-            <p>{companyName}</p>
-            <p>{title}</p>
+            <p className="companyName">{companyName}</p>
+            <p className="title">{title}</p>
           </div>
           <div className="cardCompany">
             <div className="cardValue">
-              <p>{workArea}</p>
-              <p>{career}</p>
+              <p className="workArea">{workArea}</p>
+              <p className="career">{career}</p>
             </div>
           </div>
         </div>
