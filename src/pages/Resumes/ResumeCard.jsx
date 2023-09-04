@@ -19,7 +19,7 @@ export default function ResumeCard({ resume, onClick }) {
 
   const handleDeleteResumeCard = () => {
     const deleteId = resumeInfo.resumeId;
-    fetch(`http://10.58.52.236:3000/resumes/${deleteId}`, {
+    fetch(`http://10.58.52.149:3000/resumes/${deleteId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
