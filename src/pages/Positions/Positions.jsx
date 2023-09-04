@@ -51,7 +51,7 @@ export default function Positions() {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.236:3000/positions?${searchParams}`)
+    fetch(`http://10.58.52.149:3000/positions?${searchParams}`)
       .then(response => response.json())
       .then(job => {
         setJobCategoryList(job.jobTypes);
