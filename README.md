@@ -15,3 +15,19 @@
   - 김민재 (Product Manager)
   - 한진한
   - 김식
+
+ 
+## Tech Stacks
+- Front-end
+  - React.js
+  - React-router-dom
+  - Sass (SCSS)
+  - Git & GitHub
+  - etc...
+
+- Back-end
+  - node.js
+  - DB Diagram
+  - multiparty
+  - postman
+  - etc...
